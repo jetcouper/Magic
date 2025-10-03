@@ -1,2 +1,2 @@
 # Magic
-ProjetMagic
+Projet de fin de session.
