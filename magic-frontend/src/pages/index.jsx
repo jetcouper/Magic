@@ -1,5 +1,5 @@
 export default function Index() {
   return  <>
-            Hello!
+            Ceci est un test.
           </>
 }
