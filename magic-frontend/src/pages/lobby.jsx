@@ -1,13 +1,84 @@
+import { useEffect, useRef, useState } from "react";
 import MainLayout from "../layouts/main-layout";
 import Button from "../components/button";
-import LoginForm from "../components/loginForm"
 import logo from '../assets/img/logo.png'
 
 export default function Lobby() {
+    const chatRef = useRef(null);
+    const [reponseServeur, setReponse] = useState([]);
+
+    const applyStyles = ()=> {
+    	let styles = {
+    		fontColor : "#333",
+    		backgroundColor : "rgba(87, 41, 5, 0.2)",
+    		fontGoogleName : "Sofia",
+    		fontSize : "20px",
+    		hideIcons : false ,
+    		inputBackgroundColor : "red",
+    		inputFontColor : "blue",
+    		height : "690px",
+    		padding: "5px",
+    		memberListFontColor : "#ff00dd",
+    		borderColor : "blue",
+    		memberListBackgroundColor : "white",
+    		hideScrollBar: true, // pour cacher le scroll bar
+    	}
+    	setTimeout(() => {
+    		chatRef.current.contentWindow.postMessage(JSON.stringify(styles), "*");	
+        }, 100);
+    }
+
+    const recupererKey = () => {
+        fetch("/api/lobby.php",{ 
+            method:"POST",
+            body:formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            //Réponse du serveur, afficher un message de succès/erreur
+            console.log(data);
+            setReponse(data);
+        })
+        
+    }
+    useEffect(() => {
+        if (reponseServeur.key) {
+            window.location.href = "/lobby";
+        }
+    }, [reponseServeur]);
+
+
+
+
     return <MainLayout>
-        <h1>
-            Page de lobby
-        </h1>
+        <div className="flex flex-col items-center justify-center mx-auto md:h-screen bg-amber-500">
+            <div className="flex flex-col items-center w-[800px] h-[600px] mb-6 text-2xl font-semibold text-gray-900 bg-green-400 gap-4 p-4">
+                <div className="justify-center ">
+                    <label className="text-2xl w-[500px] h-[100px] font-semibold rounded-md border-black border-4 text-gray-900 bg-white flex items-center justify-center text-center">
+                        Bienvenue dans le lobby! Vous êtes connecté.
+                    </label>
+                </div>
+                <div className="flex flex-row items-center justify-center gap-20">
+                    <Button>
+                        Pratique
+                    </Button>
+                    <Button>
+                        Jouer
+                    </Button>
+                </div>
+                <div className="flex items-center justify-center gap-20">
+                    <Button>
+                        Quitter
+                    </Button>
+                </div>
+
+                <div className="flex items-center justify-center gap-20 bottom-28">
+                    <iframe ref={chatRef} width={700} height={240} onLoad={applyStyles()}
+                        src="https://magix.apps-de-cours.com/server/chat/votre-clé-ici">
+                    </iframe>
+                </div>
+            </div>
+        </div>
     </MainLayout>
 
 }

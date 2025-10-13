@@ -18,21 +18,21 @@
                 session_start();
             }
 
-			if (empty($_SESSION["visibility"])) {
-                $_SESSION["visibility"] = self::$VISIBILITY_PUBLIC;
-			}
-
-            if ($_SESSION["visibility"] < $this->pageVisibility) {
-                header("location:login.php");
-				exit;
-            }
-
-            $data = $this->executeAction();
-            $data["isLoggedIn"] = $_SESSION["visibility"] > self::$VISIBILITY_PUBLIC;
-            $data["username"] = $_SESSION["username"] ?? "Invité";
-
-            return $data;
-        }
+			      if (empty($_SESSION["visibility"])) {
+                      $_SESSION["visibility"] = self::$VISIBILITY_PUBLIC;
+			      }
+          
+                  if ($_SESSION["visibility"] < $this->pageVisibility) {
+                      header("location:login.php");
+			      	exit;
+                  }
+                
+                  $data = $this->executeAction();
+                  $data["isLoggedIn"] = $_SESSION["visibility"] > self::$VISIBILITY_PUBLIC;
+                  $data["username"] = $_SESSION["username"] ?? "Invité";
+                
+                  return $data;
+              }
 
         /**
          * data = ['key1' => 'value1', 'key2' => 'value2'];

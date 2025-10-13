@@ -7,9 +7,7 @@ import logo from '../assets/img/logo.png'
 export default function MainLayout({title ,children}){
 
     return <>
-                {/* <header className="flex bg-blue-400 rounded border-4 border-blue-950 justify-between items-center p-2">
-                    <img src={logo} className="h-20"></img>
-                    <h1>{title ?? "Inconnu!"}</h1>
+                {/* <header>
                 </header> */}
                 {/* <nav>
                     <ul>
@@ -19,6 +17,7 @@ export default function MainLayout({title ,children}){
                         <li><NavLink to="/programmes">Programmes</NavLink></li>
                     </ul>
                 </nav> */}
+
                 <main>
                     {children}
                 </main>

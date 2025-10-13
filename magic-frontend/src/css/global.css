@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+.holographic-button {
+  background: linear-gradient(45deg, #ff0099, #493240, #f6f, #b6f, #50c878);
+  background-size: 200% 200%;
+  animation: moveGradient 4s ease infinite;
+  padding: 15px 30px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5); /* Optional glow */
+}
+
+@keyframes moveGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
