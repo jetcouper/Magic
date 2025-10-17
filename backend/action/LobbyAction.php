@@ -8,11 +8,15 @@
         }
 
         protected function executeAction() {
-            $data = [];
-            
-            
 
-
-            return [];
+            if (isset($_POST["key"])) {
+                $data["key"] = $_POST["key"];
+                $result = parent::callAPI("signout", $data);
+                return compact("result");
+            }
+            else {
+                $result = $_SESSION["key"];
+                return compact("result");
+            }
         }
     }
