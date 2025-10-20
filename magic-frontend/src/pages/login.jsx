@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 
 
 
+
 export default function Login() {
     const navigate = useNavigate();
 
@@ -46,11 +47,11 @@ export default function Login() {
 
 
     return  <MainLayout title="Login">
-              <section className="dark:bg-gray-900"> 
-                <div className="flex flex-col items-center justify-center mx-auto md:h-screen">
+              <section className="dark:bg-gray-900 "> 
+                <div className="flex flex-col items-center justify-center mx-auto md:h-screen ">
                     <div className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                         <img className="w-40 h-30" src={logo} alt="logo"></img>
-                        <h1 className="flex items-center text-3xl">
+                        <h1 className="flex items-center text-3xl font-starwars">
                           Magix  
                       </h1>
                     </div>

@@ -72,7 +72,7 @@ export default function Lobby() {
 
 
 
-    return <MainLayout>
+    return <MainLayout title="Lobby">
         <div className="flex flex-col items-center justify-center mx-auto md:h-screen bg-amber-500">
             <div className="flex flex-col items-center w-[1000px] h-[700px] mb-6 text-2xl font-semibold text-gray-900 bg-green-400 gap-4 p-4">
                 <div className="justify-center ">

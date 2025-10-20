@@ -2,6 +2,7 @@
 
 import { NavLink } from "react-router";
 import logo from '../assets/img/logo.png'
+import '../css/global.css'
 
 //children = ce qui est entre <MainLayout> et </MainLayout>
 export default function MainLayout({title ,children}){
@@ -18,7 +19,7 @@ export default function MainLayout({title ,children}){
                     </ul>
                 </nav> */}
 
-                <main>
+                <main className="font-starwars">
                     {children}
                 </main>
                 {/* <footer>
