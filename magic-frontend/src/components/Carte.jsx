@@ -4,7 +4,7 @@ import clickSoundFile from "../audio/click.wav";
 
 
 
-export default function Carte( {onClick, className = "", text ,children}){
+export default function Carte( {onClick, className = ""}){
     // const hoverSound = useRef(new Audio(hoverSoundFile));
     // const clickSound = useRef(new Audio(clickSoundFile));
     
@@ -21,19 +21,25 @@ export default function Carte( {onClick, className = "", text ,children}){
 
 
 
-    return <div className={"rounded border border-slate-400 p-1 hover:bg-slate-300 w-48 h-12 " + className}>
-                <img>test image</img>
-                <text>
-                    test
-                </text>
-                <div class=" col-span-1 rounded-lg h-12">
-                    4
+    return <div className={"text-[10px] rounded border border-slate-400 p-1 hover:bg-slate-300 w-36 h-56 justify-items-center " + className}>
+                <img className="rounded border w-25 h-25 justify-center " src="/images/sabre.jpg" />
+                <div className="rounded border w-35 h-10 text-left ">
+                    <label className="ml-2">
+                    Minion
+                    </label>
+                </div>
+                
+                <div className="rounded border w-35 h-15 col-span-1 ">
+                    Je suis un personnage faible.
                     </div> 
-      	        <div class=" rounded-lg h-12">
-
+      	        <div className="rounded border w-35 h-5 flex justify-between px-2">
+                    <div className="rounded-lg ">
+                        V
                     </div> 
-                <div class=" rounded-lg h-12">5
-
+                    <div className="rounded-lg ">
+                        D
                     </div> 
+                </div> 
+                
             </div>
 }

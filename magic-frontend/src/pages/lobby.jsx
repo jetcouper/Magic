@@ -69,6 +69,9 @@ export default function Lobby() {
         recupererKey();
     }   
 
+    const versJeu = () => {
+        navigate("/jeu");
+    }
 
 
 
@@ -84,7 +87,7 @@ export default function Lobby() {
                     <Button>
                         Pratique
                     </Button>
-                    <Button>
+                    <Button onClick={() => versJeu()}>
                         Jouer
                     </Button>
                 </div>
