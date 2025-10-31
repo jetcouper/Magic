@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 export default function Lobby() {
     const chatRef = useRef(null);
     const [reponseServeur, setReponse] = useState("");
+    const [reponseServeurType, setType] = useState("");
     const navigate = useNavigate();
 
     const goToLogin = () => {
@@ -46,8 +47,6 @@ export default function Lobby() {
         
     }
     const quitterSession = () =>{
-        
-        
         let formData = new FormData();
         formData.append("key", reponseServeur); // $_POST["key"]
 
@@ -63,6 +62,25 @@ export default function Lobby() {
             navigate("/");
         })
     }
+    
+    const jouer = ($type) =>{
+        let formData = new FormData();
+        formData.append("key", reponseServeur); // $_POST["key"]
+        formData.append("type", $type); // $_POST["key"]
+
+        fetch("/api/lobby.php",{ 
+            method:"POST",
+            body:formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            //Réponse du serveur, afficher un message de succès/erreur
+            console.log(data);
+            setReponse("");
+            versJeu();
+        })
+    }
+
 
     const appliquerFonctions = () => {
         applyStyles();
@@ -84,10 +102,10 @@ export default function Lobby() {
                     </label>
                 </div>
                 <div className="flex flex-row items-center justify-center gap-20">
-                    <Button>
+                    <Button onClick={() => jouer("TRAINING")}>
                         Pratique
                     </Button>
-                    <Button onClick={() => versJeu()}>
+                    <Button onClick={() => jouer("PVP")}>
                         Jouer
                     </Button>
                 </div>

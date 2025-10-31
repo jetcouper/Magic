@@ -8,11 +8,30 @@
         }
 
         protected function executeAction() {
+            $data = [];
+
 
             if (isset($_POST["key"])) {
                 $data["key"] = $_POST["key"];
-                $result = parent::callAPI("signout", $data);
-                return compact("result");
+                if(isset($_POST["type"]))
+                {
+                    if($_POST["type"] == "PVP"){
+                        $data["type"] = $_POST["type"];
+                        $result = parent::callAPI("games/auto-match", $data);
+                        return compact("result");
+                    }
+                    if($_POST["type"]== "TRAINING"){
+                        $data["type"] = $_POST["type"];
+                        $result = parent::callAPI("games/auto-match", $data);
+                        return compact("result");
+                    }
+                }
+                else{
+                    
+                    $result = parent::callAPI("signout", $data);
+                    return compact("result");
+                }
+                
             }
             else {
                 $result = $_SESSION["key"];
