@@ -44,7 +44,6 @@ export default function Lobby() {
             console.log(data);
             setReponse(data);
         })
-        
     }
     const quitterSession = () =>{
         let formData = new FormData();
@@ -98,20 +97,20 @@ export default function Lobby() {
             <div className="flex flex-col items-center w-[1000px] h-[700px] mb-6 text-2xl font-semibold text-gray-900 bg-green-400 gap-4 p-4">
                 <div className="justify-center ">
                     <label className="text-2xl w-[500px] h-[100px] font-semibold rounded-md border-black border-4 text-gray-900 bg-white flex items-center justify-center text-center">
-                        Bienvenue dans le lobby! Vous êtes connecté.
+                        bienvenue dans le lobby! vous êtes connecté.
                     </label>
                 </div>
                 <div className="flex flex-row items-center justify-center gap-20">
                     <Button onClick={() => jouer("TRAINING")}>
-                        Pratique
+                        pratique
                     </Button>
                     <Button onClick={() => jouer("PVP")}>
-                        Jouer
+                        jouer
                     </Button>
                 </div>
                 <div className="flex items-center justify-center gap-20">
                     <Button onClick={() => goToLogin()}>
-                        Quitter
+                        quitter
                     </Button>
                 </div>
 
