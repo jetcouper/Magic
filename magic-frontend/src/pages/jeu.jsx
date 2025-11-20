@@ -6,7 +6,11 @@ import logo from '../assets/img/logo.png'
 import { useNavigate } from "react-router";
 
 export default function Jeu() {
-    const [etatJeu, setEtatJeu] = useState("");
+    const [etatJeu, setEtatJeu] = useState({});
+    const chatRef = useRef(null);
+    const [cleServeur, setReponse] = useState("");
+    const stateTimeout = useRef(null)
+
     const fetchState = () => {
 	fetch("/api/game-state.php")
 	.then(response => response.json())
@@ -25,9 +29,7 @@ export default function Jeu() {
     	}
     }, []);
 
-    const chatRef = useRef(null);
-    const [cleServeur, setReponse] = useState("");
-    const stateTimeout = useRef(null)
+    
 
     const recupererKey = () => {
         fetch("/api/lobby.php")
@@ -41,7 +43,7 @@ export default function Jeu() {
     const jouer = ($type) =>{
         let formData = new FormData();
         formData.append("key", cleServeur); // $_POST["key"]
-        formData.append("type", $type); // $_POST["key"]
+        formData.append("type", $type); // Type
 
         fetch("/api/lobby.php",{ 
             method:"POST",
@@ -67,21 +69,26 @@ export default function Jeu() {
     tab.push(7)
     tab.push(8)
 
-
-
-
-
-
     return <MainLayout title="Jeu" onLoad={recupererKey}>
         <div className="flex flex-col mx-auto md:h-screen bg-amber-500">
-            {
+            {/* {
                 //If parti existe pas, il va crash
-            }
+                if (typeof maVariable !== "object") {
+                    if (maVariable == "GAME_NOT_FOUND") {
+                    		// Fin de la partie. Est-ce que j’ai gagné? Je dois appeler user-info
+                    }
+                }
+                else {
+                	// maVariable est un objet. On pourrait faire, par exemple, maVariable.game.php ou 
+                	// maVariable.player.mp
+                }
+
+            } */}
                 <div className="w-full h-[18vh] border-2">
                     <div className="text-2xl grid grid-cols-3 w-full h-full font-semibold rounded-md text-gray-900 bg-transparent text-center">
                         <div className=" flex items-center justify-center">
                             {
-                                Array.from({length: nbCarteEnnemi}).map((_,i) => (
+                                Array.from({length: etatJeu?.opponent?.handSize ?? 0}).map((_,i) => (
                                     <div key={i} className="w-20 h-25 relative z-10 bg-size-[100%_100%] bg-[url('/images/back_card.png')]">
                                     </div>
 
@@ -89,22 +96,21 @@ export default function Jeu() {
                             }
                         </div>
                         <div className=" flex items-center justify-center gap-4 ">
-                            <label>nom{}</label>
+                            <label>{etatJeu?.opponent?.username}</label>
                             <div className="w-32 h-32 rounded-full bg-[url(/images/warrior.jpg)] bg-cover bg-center border-4 border-black shadow-lg">
 
                             </div>
-                            <label >{}</label>
-                            class
+                            <label >{etatJeu?.opponent?.heroClass}</label>
                         </div>
                         <div className=" flex flex-col items-end justify-center gap-4 text-5xl">
                             <div className="bg-[url(/images/medical_symbol.png)] w-40 h-15  bg-contain pl-10 bg-no-repeat">
-                                0
+                                {etatJeu?.opponent?.hp}
                             </div>
                             <div className="bg-[url(/images/credit_symbol.png)] w-40 h-15 bg-contain pl-10 bg-no-repeat">
-                                0
+                                {etatJeu?.opponent?.mp}
                             </div>
                             <div className="bg-[url(/images/back_card.png)] w-40 h-15 bg-contain pl-10 bg-no-repeat">
-                                0
+                                {etatJeu?.opponent?.remainingCardsCount}
                             </div>
                         </div>
 
@@ -112,32 +118,43 @@ export default function Jeu() {
                 </div>
                 <div className="w-full h-[30vh] border-2">
                     <div className="text-2xl w-full h-full font-semibold rounded-md  text-gray-900 bg-transparent flex items-center justify-center text-center">
-                        <Carte nom="Anakin" description="Chevalier jedi" credit="10" attack="10" life="200"></Carte>
+                        {
+                            etatJeu?.opponent?.board?.map((carte)=> {
+                                    return <Carte key={carte} nom={carte.id} credit={carte.cost} life={carte.hp} description={carte.mechanics.join(", ")} attack={carte.atk} >
+                                    </Carte>
+                                })
+                        }
+                        {/* <Carte nom="Anakin" description="Chevalier jedi" credit="10" attack="10" life="200"></Carte> */}
                     </div>
                 </div>
                 <div className="w-full h-[30vh] border-2">
                     <div className="text-2xl w-full h-full font-semibold rounded-md   text-gray-900 bg-transparent flex items-center justify-center text-center">
-                        <Carte nom="obi-wan" description="Maitre jedi" credit="12" attack="15" life="250" ></Carte>
+                        {
+                            etatJeu?.board?.map((carte)=> {
+                                    return <Carte key={carte} nom={carte.id} credit={carte.cost} life={carte.hp} description={carte.mechanics.join(", ")} attack={carte.atk} >
+                                    </Carte>
+                                })
+                        }
+                        {/* <Carte nom="obi-wan" description="Maitre jedi" credit="12" attack="15" life="250" ></Carte> */}
                     </div>
                 </div>
                 <div className="w-full h-[25vh] border-2">
                     <div className=" text-2xl w-full h-full font-semibold rounded-md   text-gray-900 bg-transparent flex items-center justify-between text-center">
                         <div className=" w-1/8 h-65 flex flex-col items-start justify-center gap-4 text-5xl">
                             <div className="bg-[url(/images/medical_symbol.png)] w-40 h-15  bg-contain pl-10 bg-no-repeat">
-                                {etatJeu.hp}
+                                {etatJeu?.hp}
                             </div>
                             <div className="bg-[url(/images/credit_symbol.png)] w-40 h-15 bg-contain pl-10 bg-no-repeat">
-                                0
+                                {etatJeu?.mp}
                             </div>
                             <div className="bg-[url(/images/back_card.png)] w-20 h-25 bg-contain pl-20 bg-no-repeat">
-                                0
+                                {etatJeu?.remainingCardsCount}
                             </div>
                         </div>
                         <div className=" w-6/8 h-65 flex gap-5 items-center justify-center">
                             {
-                                tab?.map((carte)=> {
-                                    return <Carte key={carte} nom={carte}>
-
+                                etatJeu?.hand?.map((carte)=> {
+                                    return <Carte key={carte} nom={carte.id} credit={carte.cost} life={carte.hp} description={carte.mechanics.join(", ")} attack={carte.atk} >
                                     </Carte>
                                 })
                             }
@@ -153,7 +170,7 @@ export default function Jeu() {
                                 <div className="bg-[url(/images/sand-hourglass-timer.png)] w-25 h-25 bg-contain pl-10 bg-no-repeat">
                                 
                                 </div>
-                                <label>0{}</label>
+                                <label>{etatJeu?.remainingTurnTime}</label>
                             </div>
                             
                         </div>

@@ -4,7 +4,7 @@ import clickSoundFile from "../audio/click.wav";
 
 
 
-export default function Carte( {onClick, className = "", credit = "" , life = "", nom = "",description = "", attack = "", imageURL = ""}){
+export default function Carte( {onClick, className = "", credit = "" , life = "", nom = "",description = "", attack = "", imageURL = "" , state = ""}){
     // const hoverSound = useRef(new Audio(hoverSoundFile));
     // const clickSound = useRef(new Audio(clickSoundFile));
     
@@ -18,7 +18,7 @@ export default function Carte( {onClick, className = "", credit = "" , life = ""
     //     clickSound.current.play();
     //     if (onClick) onClick(e);
     // };
-
+    let currentstate = state
 
 
     return <div className={"text-gray-200 relative text-[10px] rounded border bg-gray-950 border-slate-400 p-1 hover:bg-slate-600 w-36 h-56 justify-items-center " + className}>
