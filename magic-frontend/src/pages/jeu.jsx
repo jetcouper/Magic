@@ -4,12 +4,15 @@ import Carte from "../components/Carte"
 import Button from "../components/button";
 import logo from '../assets/img/logo.png'
 import { useNavigate } from "react-router";
+import cartes from "../javascript/cartes";
+
 
 export default function Jeu() {
     const [etatJeu, setEtatJeu] = useState({});
     const chatRef = useRef(null);
     const [cleServeur, setReponse] = useState("");
     const stateTimeout = useRef(null)
+    const carte = cartes
 
     const fetchState = () => {
 	fetch("/api/game-state.php")
@@ -57,33 +60,8 @@ export default function Jeu() {
         })
     }
 
-
-    let nbCarteEnnemi = 8
-    let tab = []
-    tab.push(1)
-    tab.push(2)
-    tab.push(3)
-    tab.push(4)
-    tab.push(5)
-    tab.push(6)
-    tab.push(7)
-    tab.push(8)
-
     return <MainLayout title="Jeu" onLoad={recupererKey}>
         <div className="flex flex-col mx-auto md:h-screen bg-amber-500">
-            {/* {
-                //If parti existe pas, il va crash
-                if (typeof maVariable !== "object") {
-                    if (maVariable == "GAME_NOT_FOUND") {
-                    		// Fin de la partie. Est-ce que j’ai gagné? Je dois appeler user-info
-                    }
-                }
-                else {
-                	// maVariable est un objet. On pourrait faire, par exemple, maVariable.game.php ou 
-                	// maVariable.player.mp
-                }
-
-            } */}
                 <div className="w-full h-[18vh] border-2">
                     <div className="text-2xl grid grid-cols-3 w-full h-full font-semibold rounded-md text-gray-900 bg-transparent text-center">
                         <div className=" flex items-center justify-center">
@@ -118,24 +96,22 @@ export default function Jeu() {
                 </div>
                 <div className="w-full h-[30vh] border-2">
                     <div className="text-2xl w-full h-full font-semibold rounded-md  text-gray-900 bg-transparent flex items-center justify-center text-center">
-                        {
+                        {   
                             etatJeu?.opponent?.board?.map((carte)=> {
-                                    return <Carte key={carte} nom={carte.id} credit={carte.cost} life={carte.hp} description={carte.mechanics.join(", ")} attack={carte.atk} >
+                                    return <Carte key={carte} nom={cartes.find((c) => c.id === carte.id)?.name ?? ""} credit={carte.cost} life={carte.hp} description={carte.mechanics.join(", ")} attack={carte.atk} >
                                     </Carte>
                                 })
                         }
-                        {/* <Carte nom="Anakin" description="Chevalier jedi" credit="10" attack="10" life="200"></Carte> */}
                     </div>
                 </div>
                 <div className="w-full h-[30vh] border-2">
                     <div className="text-2xl w-full h-full font-semibold rounded-md   text-gray-900 bg-transparent flex items-center justify-center text-center">
                         {
                             etatJeu?.board?.map((carte)=> {
-                                    return <Carte key={carte} nom={carte.id} credit={carte.cost} life={carte.hp} description={carte.mechanics.join(", ")} attack={carte.atk} >
+                                    return <Carte key={carte} nom={cartes.find((c) => c.id === carte.id)?.name ?? ""} credit={carte.cost} life={carte.hp} description={carte.mechanics.join(", ")} attack={carte.atk} >
                                     </Carte>
                                 })
                         }
-                        {/* <Carte nom="obi-wan" description="Maitre jedi" credit="12" attack="15" life="250" ></Carte> */}
                     </div>
                 </div>
                 <div className="w-full h-[25vh] border-2">
@@ -154,7 +130,7 @@ export default function Jeu() {
                         <div className=" w-6/8 h-65 flex gap-5 items-center justify-center">
                             {
                                 etatJeu?.hand?.map((carte)=> {
-                                    return <Carte key={carte} nom={carte.id} credit={carte.cost} life={carte.hp} description={carte.mechanics.join(", ")} attack={carte.atk} >
+                                    return <Carte key={carte} nom={cartes.find((c) => c.id === carte.id)?.name ?? ""} credit={carte.cost} life={carte.hp} description={carte.mechanics.join(", ")} attack={carte.atk} >
                                     </Carte>
                                 })
                             }
