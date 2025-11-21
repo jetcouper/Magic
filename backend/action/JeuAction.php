@@ -9,6 +9,12 @@
 
         protected function executeAction() {
 
+
+            $data = [];
+            $data["key"] = $_SESSION["key"];
+
+            $result = parent::callAPI("games/state", $data);
+            return compact("result");
             // if (isset($_POST["key"])) {
             //     $data["key"] = $_POST["key"];
             //     $result = parent::callAPI("signout", $data);

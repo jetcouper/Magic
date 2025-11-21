@@ -12,7 +12,7 @@ export default function Jeu() {
     const chatRef = useRef(null);
     const [cleServeur, setReponse] = useState("");
     const stateTimeout = useRef(null)
-    const carte = cartes
+    const cartejeu = cartes
 
     const fetchState = () => {
 	fetch("/api/game-state.php")
@@ -43,7 +43,7 @@ export default function Jeu() {
             setReponse(data);
         })
     }
-    const jouer = ($type) =>{
+    const attaque = ($type) =>{
         let formData = new FormData();
         formData.append("key", cleServeur); // $_POST["key"]
         formData.append("type", $type); // Type
@@ -98,7 +98,7 @@ export default function Jeu() {
                     <div className="text-2xl w-full h-full font-semibold rounded-md  text-gray-900 bg-transparent flex items-center justify-center text-center">
                         {   
                             etatJeu?.opponent?.board?.map((carte)=> {
-                                    return <Carte key={carte} nom={cartes.find((c) => c.id === carte.id)?.name ?? ""} credit={carte.cost} life={carte.hp} description={carte.mechanics.join(", ")} attack={carte.atk} >
+                                    return <Carte key={carte} nom={cartejeu.find((c) => c.id === carte.id)?.name ?? ""} credit={carte.cost} life={carte.hp} description={carte.mechanics.join(", ")} attack={carte.atk} >
                                     </Carte>
                                 })
                         }
@@ -108,7 +108,7 @@ export default function Jeu() {
                     <div className="text-2xl w-full h-full font-semibold rounded-md   text-gray-900 bg-transparent flex items-center justify-center text-center">
                         {
                             etatJeu?.board?.map((carte)=> {
-                                    return <Carte key={carte} nom={cartes.find((c) => c.id === carte.id)?.name ?? ""} credit={carte.cost} life={carte.hp} description={carte.mechanics.join(", ")} attack={carte.atk} >
+                                    return <Carte key={carte} nom={cartejeu.find((c) => c.id === carte.id)?.name ?? ""} credit={carte.cost} life={carte.hp} description={carte.mechanics.join(", ")} attack={carte.atk} >
                                     </Carte>
                                 })
                         }
@@ -130,7 +130,7 @@ export default function Jeu() {
                         <div className=" w-6/8 h-65 flex gap-5 items-center justify-center">
                             {
                                 etatJeu?.hand?.map((carte)=> {
-                                    return <Carte key={carte} nom={cartes.find((c) => c.id === carte.id)?.name ?? ""} credit={carte.cost} life={carte.hp} description={carte.mechanics.join(", ")} attack={carte.atk} >
+                                    return <Carte key={carte} nom={cartejeu.find((c) => c.id === carte.id)?.name ?? ""} credit={carte.cost} life={carte.hp} description={carte.mechanics.join(", ")} attack={carte.atk} >
                                     </Carte>
                                 })
                             }
