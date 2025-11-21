@@ -1,27 +1,30 @@
 import { useRef } from "react";
 import hoverSoundFile from "../audio/hover.wav";
 import clickSoundFile from "../audio/click.wav";
+import React, { useState } from 'react';
 
 
 
 export default function Carte( {onClick, className = "", credit = "" , life = "", nom = "",description = "", attack = "", imageURL = "" , state = ""}){
-    // const hoverSound = useRef(new Audio(hoverSoundFile));
-    // const clickSound = useRef(new Audio(clickSoundFile));
+    const [isActive, setIsActive] = useState(false);
+
+    const changeStyleCarte = () => {
+        setIsActive(!isActive);
+    }
+    //     const [buttonStyle, setButtonStyle] = useState({
+    //     backgroundColor: 'blue',
+    //     color: 'white',
+    //     padding: '10px',});
     
-    // const handleMouseEnter = () => {
-    //     hoverSound.current.currentTime = 0; // Repartir du début
-    //     hoverSound.current.play();
-    // };
 
-    // const handleClick = (e) => {
-    //     clickSound.current.currentTime = 0;
-    //     clickSound.current.play();
-    //     if (onClick) onClick(e);
-    // };
-    let currentstate = state
+    const handleClick = (e) => {
+        if (onClick) onClick(e);
+    };
+    
+    
 
 
-    return <div className={"text-gray-200 relative text-[10px] rounded border bg-gray-950 border-slate-400 p-1 hover:bg-slate-600 w-36 h-56 justify-items-center " + className}>
+    return <div onClick={handleClick} className={"text-gray-200 relative text-[10px] rounded border bg-gray-950 border-slate-400 p-1 hover:bg-slate-600 w-36 h-56 justify-items-center " + className}>
                 <img className="rounded border w-25 h-25 justify-center " src="/images/sabre.jpg" />
                 <div className="rounded border-0 w-5 h-5 absolute top-0 -left-6 bg-[url(/images/credit_symbol.png)] bg-cover bg-no-repeat ">
                     <p className="absolute text-[12px] top-0 left-7 opacity-75 ">
@@ -29,7 +32,7 @@ export default function Carte( {onClick, className = "", credit = "" , life = ""
                     </p>
                 </div>
                 
-                <div className="rounded border w-35 h-10 text-left ">
+                <div className="rounded border w-35 h-10 text-center ">
                     <label className="ml-2" >
                     {nom}
                     </label>
@@ -51,3 +54,4 @@ export default function Carte( {onClick, className = "", credit = "" , life = ""
                 
             </div>
 }
+
