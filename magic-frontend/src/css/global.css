@@ -1,5 +1,283 @@
 @import "tailwindcss";
 
+/* ================================
+   ANIMATIONS HOLOGRAPHIQUES STAR WARS
+   ================================ */
+
+/* Animation de fluctuation holographique */
+@keyframes holo-fluctuate {
+  0%   { transform: translateX(0) translateY(0) scale(1); opacity: 0.95; }
+  20%  { transform: translateX(-3px) translateY(1px) scale(1.01); opacity: 0.85; }
+  40%  { transform: translateX(2px) translateY(-2px) scale(0.99); opacity: 0.90; }
+  60%  { transform: translateX(-1px) translateY(3px) scale(1.02); opacity: 0.88; }
+  80%  { transform: translateX(1px) translateY(-1px) scale(0.98); opacity: 0.92; }
+  100% { transform: translateX(0) translateY(0) scale(1); opacity: 0.95; }
+}
+
+/* Animation de glitch/interférence */
+@keyframes holo-glitch {
+  0%, 100% { 
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+  }
+  10% { 
+    clip-path: inset(10% 0 85% 0);
+    transform: translateX(-5px);
+  }
+  20% { 
+    clip-path: inset(80% 0 10% 0);
+    transform: translateX(5px);
+  }
+  30% { 
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+  }
+  40% {
+    clip-path: inset(50% 0 30% 0);
+    transform: translateX(3px);
+  }
+  50% { 
+    clip-path: inset(10% 0 60% 0);
+    transform: translateX(-3px);
+  }
+  60% {
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+  }
+}
+
+/* Animation de wobble léger */
+@keyframes holo-wobble {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-1px); }
+  100% { transform: translateX(1px); }
+}
+
+/* Animation de pulse pour la lueur */
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 25px rgba(34, 211, 238, 0.6), 
+                0 0 50px rgba(34, 211, 238, 0.3),
+                inset 0 0 20px rgba(34, 211, 238, 0.1);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(34, 211, 238, 0.8), 
+                0 0 80px rgba(34, 211, 238, 0.5),
+                inset 0 0 30px rgba(34, 211, 238, 0.2);
+  }
+}
+
+/* Animation du faisceau de projection */
+@keyframes projection-beam {
+  0% { 
+    opacity: 0.3;
+    transform: scaleY(0.95) scaleX(1);
+  }
+  50% { 
+    opacity: 0.6;
+    transform: scaleY(1) scaleX(0.98);
+  }
+  100% { 
+    opacity: 0.3;
+    transform: scaleY(0.95) scaleX(1);
+  }
+}
+
+/* Animation de pulsation du projecteur */
+@keyframes projector-pulse {
+  0%, 100% { 
+    box-shadow: 
+      0 0 20px rgba(34, 211, 238, 0.8),
+      0 0 40px rgba(34, 211, 238, 0.6),
+      0 0 60px rgba(34, 211, 238, 0.4);
+    opacity: 0.9;
+  }
+  50% { 
+    box-shadow: 
+      0 0 30px rgba(34, 211, 238, 1),
+      0 0 60px rgba(34, 211, 238, 0.8),
+      0 0 90px rgba(34, 211, 238, 0.6);
+    opacity: 1;
+  }
+}
+
+/* Animation des particules dans le faisceau */
+@keyframes particles-rise {
+  0% { 
+    transform: translateY(100%) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% { 
+    transform: translateY(-100%) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* ================================
+   CLASSES UTILITAIRES
+   ================================ */
+
+.animate-holo-fluctuate {
+  animation: holo-fluctuate 1.8s ease-in-out infinite;
+}
+
+.animate-holo-glitch {
+  animation: holo-glitch 3s steps(10) infinite;
+}
+
+.animate-holo-wobble {
+  animation: holo-wobble 1.2s ease-in-out infinite alternate;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Combinaison des effets pour le container principal */
+.holo-container {
+  animation: 
+    holo-fluctuate 1.8s ease-in-out infinite,
+    pulse-glow 2s ease-in-out infinite;
+}
+
+/* ================================
+   EFFET DE PROJECTION HOLOGRAPHIQUE
+   ================================ */
+
+/* Base du projecteur (communicateur) */
+.holo-projector {
+  position: relative;
+  width: 120px;
+  height: 40px;
+  margin: 0 auto 20px;
+  background: linear-gradient(180deg, 
+    rgba(15, 23, 42, 0.9) 0%, 
+    rgba(30, 41, 59, 0.8) 100%);
+  border: 2px solid rgba(34, 211, 238, 0.4);
+  border-radius: 8px;
+  box-shadow: 
+    0 0 20px rgba(34, 211, 238, 0.6),
+    inset 0 0 10px rgba(34, 211, 238, 0.2);
+  animation: projector-pulse 2s ease-in-out infinite;
+}
+
+/* Lumière du projecteur */
+.holo-projector::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 8px;
+  background: radial-gradient(ellipse at center, 
+    rgba(34, 211, 238, 1) 0%, 
+    rgba(34, 211, 238, 0.6) 50%, 
+    transparent 100%);
+  border-radius: 50%;
+  filter: blur(3px);
+}
+
+/* Indicateurs lumineux sur le projecteur */
+.holo-projector::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: rgba(34, 211, 238, 0.8);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 10px rgba(34, 211, 238, 1),
+    0 0 20px rgba(34, 211, 238, 0.8);
+  animation: projector-pulse 1s ease-in-out infinite;
+}
+
+/* Faisceau de lumière conique */
+.projection-beam {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 300px;
+  background: linear-gradient(to top, 
+    rgba(34, 211, 238, 0.4) 0%,
+    rgba(34, 211, 238, 0.2) 30%,
+    rgba(34, 211, 238, 0.1) 60%,
+    transparent 100%);
+  clip-path: polygon(40% 100%, 0% 0%, 100% 0%, 60% 100%);
+  filter: blur(8px);
+  animation: projection-beam 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Deuxième couche de faisceau pour plus de profondeur */
+.projection-beam::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 100%;
+  background: linear-gradient(to top, 
+    rgba(34, 211, 238, 0.3) 0%,
+    rgba(34, 211, 238, 0.15) 40%,
+    transparent 70%);
+  clip-path: polygon(45% 100%, 10% 0%, 90% 0%, 55% 100%);
+  filter: blur(4px);
+}
+
+/* Particules montantes dans le faisceau */
+.projection-particles {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.projection-particles::before,
+.projection-particles::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 2px;
+  height: 2px;
+  background: rgba(34, 211, 238, 0.8);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 5px rgba(34, 211, 238, 1),
+    0 0 10px rgba(34, 211, 238, 0.8);
+  animation: particles-rise 3s linear infinite;
+}
+
+.projection-particles::before {
+  left: 30%;
+  animation-delay: 0s;
+}
+
+.projection-particles::after {
+  left: 70%;
+  animation-delay: 1.5s;
+}
+
+/* ================================
+   BOUTON HOLOGRAPHIQUE
+   ================================ */
+
 .holographic-button {
   background: linear-gradient(45deg, #ff0099, #493240, #f6f, #b6f, #50c878);
   background-size: 200% 200%;
@@ -10,7 +288,7 @@
   border-radius: 8px;
   font-size: 1.2em;
   cursor: pointer;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5); /* Optional glow */
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
 }
 
 @keyframes moveGradient {
@@ -19,8 +297,9 @@
   100% { background-position: 0% 50%; }
 }
 
-
-
+/* ================================
+   POLICE STAR WARS
+   ================================ */
 
 @font-face {
   font-family: 'StarWars';
@@ -29,6 +308,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @theme {
   --font-starwars: 'StarWars', sans-serif;
 }
@@ -36,6 +316,10 @@
 html, body, section {
   font-family: var(--font-starwars);
 }
+
+/* ================================
+   AUTRES BOUTONS
+   ================================ */
 
 .inactive-button {
   background-color: blue;
@@ -50,4 +334,17 @@ html, body, section {
   border: 2px solid green;
 }
 
+/* ================================
+   EFFETS SUPPLÉMENTAIRES
+   ================================ */
 
+/* Lignes de scan holographiques */
+.scan-lines {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.06) 0px,
+    rgba(255, 255, 255, 0.06) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+}

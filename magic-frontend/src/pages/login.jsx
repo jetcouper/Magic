@@ -3,10 +3,7 @@ import MainLayout from "../layouts/main-layout";
 import Button from "../components/button";
 import logo from '../assets/img/logo.png'
 import { useNavigate } from "react-router";
-
-
-
-
+import starDestroyerVideo from '../../public/video/star-destroyer-2.3840x2160.mp4';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -22,11 +19,11 @@ export default function Login() {
     const [reponseServeur, setReponse] = useState([]);
 
     const appelerServeurLogin = e =>{
-        e.preventDefault(); //N'envoie pas le formulaire 
+        e.preventDefault();
         
         let formData = new FormData();
-        formData.append("username", addLogin.username); // $_POST["username"]
-        formData.append("password", addLogin.password); // $_POST["password"]
+        formData.append("username", addLogin.username);
+        formData.append("password", addLogin.password);
 
         fetch("/api/login.php",{ 
             method:"POST",
@@ -34,51 +31,125 @@ export default function Login() {
         })
         .then(response => response.json())
         .then(data => {
-            //Réponse du serveur, afficher un message de succès/erreur
             console.log(data);
             setReponse(data);
         })
     }
-        useEffect(() => {
+    
+    useEffect(() => {
         if (reponseServeur.key) {
             goToLobby();
         }
     }, [reponseServeur]);
 
-
-    return  <MainLayout title="Login">
-              <section className="dark:bg-gray-900 "> 
-                <div className="flex flex-col items-center justify-center mx-auto md:h-screen ">
+    return (
+        <MainLayout title="Login">
+            <section className="relative min-h-screen overflow-hidden"> 
+                <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-cover -z-10">
+                    <source src={starDestroyerVideo} type="video/mp4"/>
+                </video>
+                {/* <div className="absolute inset-0 bg-black/60 -z-5"></div> */}
+                <div className="relative z-10 flex flex-col items-center justify-center mx-auto min-h-screen py-8 px-4">
+                    {/* Logo */}
                     <div className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                        <img className="w-40 h-30" src={logo} alt="logo"></img>
+                        <img className="w-40 h-30" src={logo} alt="logo" />
                     </div>
-                    <div className="w-full bg-gray-500 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                        <div className="p-6 space-y-4 md:space-y-6 sm:p-8 ">
-                            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                                entrer votre nom d'usager
+                    
+                    {/* Container holographique - UTILISEZ LA CLASSE holo-container */}
+                    <div className="holo-container w-full max-w-md p-4 text-cyan-300 rounded-xl border border-cyan-300/40 bg-cyan-900/10 backdrop-blur-sm relative overflow-hidden scan-lines">
+                        
+                        {/* Effet de glitch en overlay */}
+                        <div className="animate-holo-glitch absolute inset-0 pointer-events-none opacity-20 bg-linear-to-r from-cyan-500/20 to-blue-500/20"></div>
+                        
+                        {/* Contenu */}
+                        <div className="p-6 space-y-4 md:space-y-6 sm:p-8 relative z-10">
+                            <h1 className="text-xl font-bold leading-tight tracking-tight text-cyan-300 md:text-2xl text-center">
+                                IDENTIFICATION REQUISE
                             </h1>
-                            <form className="space-y-4 md:space-y-6" action="" onSubmit={e => appelerServeurLogin(e)}>
+                            
+                            <form className="space-y-4 md:space-y-6" onSubmit={e => appelerServeurLogin(e)}>
+                                {/* Username */}
                                 <div>
-                                    <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">votre username</label>
-                                    <input value={addLogin.username} onChange={(e) => setAddLogin({...addLogin,username : e.target.value})} type="username" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="ex:darkshadow" required=""></input>
+                                    <label 
+                                        htmlFor="username" 
+                                        className="block mb-2 text-sm font-medium text-cyan-300 tracking-wide"
+                                    >
+                                        CODE D'IDENTIFICATION
+                                    </label>
+                                    <input 
+                                        value={addLogin.username} 
+                                        onChange={(e) => setAddLogin({...addLogin, username: e.target.value})} 
+                                        type="text" 
+                                        name="username" 
+                                        id="username" 
+                                        className="bg-gray-900/50 border border-cyan-500/50 text-cyan-100 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 placeholder-cyan-700 backdrop-blur-sm outline-none transition-all duration-300" 
+                                        placeholder="ex: darkshadow" 
+                                        required 
+                                    />
                                 </div>
+                                
+                                {/* Password */}
                                 <div>
-                                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">mot de passe</label>
-                                    <input value={addLogin.password} onChange={(e) => setAddLogin({...addLogin,password : e.target.value})} type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""></input>
+                                    <label 
+                                        htmlFor="password" 
+                                        className="block mb-2 text-sm font-medium text-cyan-300 tracking-wide"
+                                    >
+                                        CLEF DE SÉCURITÉ
+                                    </label>
+                                    <input 
+                                        value={addLogin.password} 
+                                        onChange={(e) => setAddLogin({...addLogin, password: e.target.value})} 
+                                        type="password" 
+                                        name="password" 
+                                        id="password" 
+                                        placeholder="••••••••" 
+                                        className="bg-gray-900/50 border border-cyan-500/50 text-cyan-100 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 placeholder-cyan-700 backdrop-blur-sm outline-none transition-all duration-300" 
+                                        required 
+                                    />
                                 </div>
-                                    <Button type="submit" className="w-full text-black bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Login</Button>
+                                
+                                {/* Bouton */}
+                                <Button 
+                                    type="submit" 
+                                    className="w-full text-cyan-900 bg-cyan-400 hover:bg-cyan-300 focus:ring-4 focus:outline-none focus:ring-cyan-500/50 font-bold rounded-lg text-sm px-5 py-2.5 text-center transition-all duration-300 hover:shadow-[0_0_30px_rgba(34,211,238,0.8)] shadow-[0_0_15px_rgba(34,211,238,0.5)]"
+                                >
+                                    ACCÈS AUTORISÉ
+                                </Button>
+                                
+                                {/* Message d'erreur */}
                                 <div>
-                                    {
-                                        reponseServeur === "INVALID_USERNAME_PASSWORD" ?
-                                        <p className="text-red-500">nom d'utilisateur ou mot de passe invalide</p>
-                                        : null
-                                    }
+                                    {reponseServeur === "INVALID_USERNAME_PASSWORD" && (
+                                        <div className="p-3 bg-red-900/20 border border-red-500/40 rounded-lg">
+                                            <p className="text-red-400 text-center text-sm animate-pulse">
+                                                ⚠ ACCÈS REFUSÉ - IDENTIFIANTS INVALIDES
+                                            </p>
+                                        </div>
+                                    )}
                                 </div>
                             </form>
+                            
+                            {/* Footer */}
+                            <div className="text-center pt-4 border-t border-cyan-500/20">
+                                <p className="text-cyan-600 text-xs tracking-widest">
+                                    SYSTÈME SÉCURISÉ
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {/* Indicateurs système */}
+                    <div className="mt-6 flex justify-center space-x-8 text-cyan-500 text-xs">
+                        <div className="flex items-center space-x-2">
+                            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                            <span className="tracking-wide">SYSTÈME ACTIF</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span className="tracking-wide">CONNEXION SÉCURISÉE</span>
                         </div>
                     </div>
                 </div>
-              </section>
-            </MainLayout>
-
-}   
+            </section>
+        </MainLayout>
+    );
+}
