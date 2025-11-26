@@ -21,7 +21,7 @@ export default function MainButton( {type = "button", onClick, className = "", t
 
 
 
-    return  <button onClick={handleClick} type={type} className={"relative z-10 bg-size-[100%_100%] hover:opacity-50 w-48 h-12 text-white font-bold py-2 px-4 rounded-lg " + className} onMouseEnter={handleMouseEnter}>
+    return  <button onClick={handleClick} type={type} className={"relative z-10 text-cyan-900 bg-cyan-400 hover:bg-cyan-300 focus:ring-4 focus:outline-none focus:ring-cyan-500/50 font-bold rounded-lg text-sm px-5 py-2.5 text-center transition-all duration-300 hover:shadow-[0_0_30px_rgba(34,211,238,0.8)] shadow-[0_0_15px_rgba(34,211,238,0.5)] " + className} onMouseEnter={handleMouseEnter}>
                 {text ?? children}
             </button>
             

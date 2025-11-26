@@ -111,7 +111,7 @@ export default function Login() {
                                 {/* Bouton */}
                                 <Button 
                                     type="submit" 
-                                    className="w-full text-cyan-900 bg-cyan-400 hover:bg-cyan-300 focus:ring-4 focus:outline-none focus:ring-cyan-500/50 font-bold rounded-lg text-sm px-5 py-2.5 text-center transition-all duration-300 hover:shadow-[0_0_30px_rgba(34,211,238,0.8)] shadow-[0_0_15px_rgba(34,211,238,0.5)]"
+                                    className="w-full "
                                 >
                                     ACCÈS AUTORISÉ
                                 </Button>
@@ -121,7 +121,7 @@ export default function Login() {
                                     {reponseServeur === "INVALID_USERNAME_PASSWORD" && (
                                         <div className="p-3 bg-red-900/20 border border-red-500/40 rounded-lg">
                                             <p className="text-red-400 text-center text-sm animate-pulse">
-                                                ⚠ ACCÈS REFUSÉ - IDENTIFIANTS INVALIDES
+                                                ACCÈS REFUSÉ - IDENTIFIANTS INVALIDES
                                             </p>
                                         </div>
                                     )}
