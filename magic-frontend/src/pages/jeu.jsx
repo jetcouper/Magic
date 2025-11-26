@@ -153,7 +153,10 @@ export default function Jeu() {
 
 
     return <MainLayout title="Jeu" onLoad={recupererKey}>
-        <div className="flex flex-col mx-auto md:h-screen bg-amber-500">
+        <div className="flex flex-col mx-auto md:h-screen">
+            <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-cover -z-10">
+                            <source src={"/video/battle-of-geonosis-star-wars.3840x2160.mp4"} type="video/mp4"/>
+            </video>
                 <div className="w-full h-[18vh] border-2">
                     <div className="text-2xl grid grid-cols-3 w-full h-full font-semibold rounded-md text-gray-900 bg-transparent text-center">
                         <div className=" flex items-center justify-center">
@@ -239,12 +242,15 @@ export default function Jeu() {
                                 })
                             }
                         </div>
-                        <div className="flex-col w-1/8 h-65 flex items-center justify-center">
+                        <div className="flex-col w-1/8 h-65 flex items-center justify-center gap-4">
                             <Button className="text-sm" onClick={() => jouerBouton("HERO_POWER")}>
                                 hero power
                             </Button>
                             <Button className="text-sm" onClick={() => jouerBouton("END_TURN")}>
                                 end turn
+                            </Button>
+                            <Button className="text-sm" onClick={() => jouerBouton("SURRENDER")}>
+                                Abbandon
                             </Button>
                             <div className="text-5xl grid grid-cols-2 items-center justify-center">
                                 <div className="bg-[url(/images/sand-hourglass-timer.png)] w-25 h-25 bg-contain pl-10 bg-no-repeat">

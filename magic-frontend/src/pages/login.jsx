@@ -3,7 +3,6 @@ import MainLayout from "../layouts/main-layout";
 import Button from "../components/button";
 import logo from '../assets/img/logo.png'
 import { useNavigate } from "react-router";
-import starDestroyerVideo from '../../public/video/star-destroyer-2.3840x2160.mp4';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -46,7 +45,7 @@ export default function Login() {
         <MainLayout title="Login">
             <section className="relative min-h-screen overflow-hidden"> 
                 <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-cover -z-10">
-                    <source src={starDestroyerVideo} type="video/mp4"/>
+                    <source src={"/video/star-destroyer-2.3840x2160.mp4"} type="video/mp4"/>
                 </video>
                 {/* <div className="absolute inset-0 bg-black/60 -z-5"></div> */}
                 <div className="relative z-10 flex flex-col items-center justify-center mx-auto min-h-screen py-8 px-4">
