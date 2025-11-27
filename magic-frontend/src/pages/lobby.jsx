@@ -3,12 +3,16 @@ import MainLayout from "../layouts/main-layout";
 import Button from "../components/button";
 import logo from '../assets/img/logo.png'
 import { useNavigate } from "react-router";
+import Note from "./note.jsx";
 
 export default function Lobby() {
     const chatRef = useRef(null);
     const [reponseServeur, setReponse] = useState("");
+    const [showNotes, setShowNotes] = useState(false);
     const [reponseServeurType, setType] = useState("");
     const navigate = useNavigate();
+
+    
 
     const goToLogin = () => {
         quitterSession();
@@ -60,7 +64,12 @@ export default function Lobby() {
             navigate("/");
         })
     }
-    
+    const ouvrirNotes = () =>{
+        setShowNotes(true);
+    }
+    const fermerNotes = () =>{
+        setShowNotes(false);
+    }
     const jouer = ($type) =>{
         let formData = new FormData();
         formData.append("key", reponseServeur); // $_POST["key"]
@@ -96,6 +105,7 @@ export default function Lobby() {
             <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-cover -z-10">
                 <source src={"/video/star-wars-space.1920x1080.mp4"} type="video/mp4"/>
             </video>
+            {showNotes && <Note close={() => setShowNotes(false)} />}
 
             <div className="flex flex-row h-full w-full">
                 <div className="w-1/4 h-full holo-container flex flex-col text-cyan-300 border border-cyan-300/40 bg-cyan-900/20 backdrop-blur-sm relative overflow-hidden scan-lines">
@@ -105,6 +115,7 @@ export default function Lobby() {
                         <Button className="h-20 border-6" onClick={() => jouer("TRAINING")}>pratique (Joueur contre l'IA)</Button>
                         <Button className="h-20 border-6" onClick={() => jouer("PVP")}>jouer (Joueur contre joueur)</Button>
                         <Button className="h-20 border-6" onClick={() => goToLogin()}>quitter (Retour au loggin)</Button>
+                        <Button className="h-20 border-6" onClick={() => ouvrirNotes()}>Les Notes</Button>
                         <div className="flex mt-20 border-8 border-cyan-900">
                             <h1 className="text-6xl text-cyan-900">Menu principal</h1>
                         </div>
