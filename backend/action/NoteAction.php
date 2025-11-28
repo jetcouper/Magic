@@ -10,15 +10,16 @@
 
         protected function executeAction() {
 
-            if(isset($_POST["sujet"]) && isset($_POST["description"]) && isset($_POST["date_note"])){
+            if((isset($_POST["sujet"])) && (isset($_POST["description"])) && (isset($_POST["date_note"]))){
                 $sujet = $_POST["sujet"];
                 $description = $_POST["description"];
                 $date_note = $_POST["date_note"];
                 NoteDAO::addNotes($sujet, $description, $date_note);
-                exit;
+                
             }
-            $notes = NoteDAO::getNotes();
-            return compact("notes");
+
+            $result = NoteDAO::getNotes();
+            return compact("result");
             
         }
     }

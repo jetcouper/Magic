@@ -97,6 +97,7 @@ export default function Lobby() {
     const versJeu = () => {
         navigate("/jeu");
     }
+    
 
 
 
@@ -105,19 +106,19 @@ export default function Lobby() {
             <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-cover -z-10">
                 <source src={"/video/star-wars-space.1920x1080.mp4"} type="video/mp4"/>
             </video>
-            {showNotes && <Note close={() => setShowNotes(false)} />}
+            {showNotes && <Note close={() => {fermerNotes()}} />}
 
             <div className="flex flex-row h-full w-full">
                 <div className="w-1/4 h-full holo-container flex flex-col text-cyan-300 border border-cyan-300/40 bg-cyan-900/20 backdrop-blur-sm relative overflow-hidden scan-lines">
                     <div className="animate-holo-glitch absolute inset-0 pointer-events-none opacity-20 bg-linear-to-r from-cyan-500/20 to-blue-500/20"></div>
-                    <div className="flex flex-col items-center justify-center gap-y-40 mt-20">
+                    <div className="flex flex-col items-center justify-center gap-y-35 mt-20">
                         <img />
                         <Button className="h-20 border-6" onClick={() => jouer("TRAINING")}>pratique (Joueur contre l'IA)</Button>
                         <Button className="h-20 border-6" onClick={() => jouer("PVP")}>jouer (Joueur contre joueur)</Button>
                         <Button className="h-20 border-6" onClick={() => goToLogin()}>quitter (Retour au loggin)</Button>
                         <Button className="h-20 border-6" onClick={() => ouvrirNotes()}>Les Notes</Button>
-                        <div className="flex mt-20 border-8 border-cyan-900">
-                            <h1 className="text-6xl text-cyan-900">Menu principal</h1>
+                        <div className="border-8 border-cyan-900">
+                            <h1 className=" text-6xl text-cyan-900">Menu principal</h1>
                         </div>
                     </div>
                 </div>

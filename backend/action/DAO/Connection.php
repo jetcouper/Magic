@@ -1,7 +1,6 @@
 <?php
     class Connection {
         private static $connection;
-
         public static function getConnection() {
             if (empty(Connection::$connection)) {
                 Connection::$connection = new PDO(DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
