@@ -30,6 +30,7 @@ export default function Note({ close }) {
             })
     }
     const selectionnerNote = (note) => {
+
         setNoteSelectionnee(note);
         setAddNotes({
                     sujet: note.sujet,
@@ -91,6 +92,7 @@ export default function Note({ close }) {
             return;
         }
         let formData = new FormData();
+        formData.append("id", noteSelectionnee.id);
         formData.append("sujet", addnotes.sujet);
         formData.append("description", addnotes.description);
         formData.append("date_note", addnotes.date);
@@ -107,6 +109,7 @@ export default function Note({ close }) {
                     description: '',
                     date: ''
                 });
+                setNoteSelectionnee(null);
                 setErreur(""); // Réinitialiser aussi les erreurs
                 recupererNotes();
 
@@ -118,13 +121,13 @@ export default function Note({ close }) {
         
     }
     const SupprimerNote = () => {
-        if (!noteSelectionnee.id()) {
+        if (!noteSelectionnee.id) {
             setErreur("Aucune note sélectionné");
             return;
         }
         
         let formData = new FormData();
-        formData.append("id", noteSelectionnee.id);
+        formData.append("delete_id", noteSelectionnee.id);
 
         fetch("/api/note.php", {
             method: "POST",
@@ -138,6 +141,7 @@ export default function Note({ close }) {
                     description: '',
                     date: ''
                 });
+                setNoteSelectionnee(null);
                 setErreur("Note supprimé"); // Réinitialiser aussi les erreurs
                 recupererNotes();
 
@@ -208,10 +212,10 @@ export default function Note({ close }) {
                         name="date_note"
                         required />
 
-                    <Button onClick={ajouterNote}>Ajouter Note</Button>
-                    <Button onClick={ModifierNote}>Modifier Note</Button>
-                    <Button onClick={SupprimerNote}>Supprimer Note</Button>
-                    <Button onClick={DeselectionnerNote}>Déselectionner</Button>
+                    <Button onClick={ajouterNote} disabled={noteSelectionnee !== null}>Ajouter Note</Button>
+                    <Button onClick={ModifierNote} disabled={noteSelectionnee === null}>Modifier Note</Button>
+                    <Button onClick={SupprimerNote} disabled={noteSelectionnee === null}>Supprimer Note</Button>
+                    <Button onClick={DeselectionnerNote} disabled={noteSelectionnee === null}>Déselectionner</Button>
                     <Button onClick={close}>Fermer</Button>
                 </div>
             </div>

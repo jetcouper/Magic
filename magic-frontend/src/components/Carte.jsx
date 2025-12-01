@@ -3,55 +3,66 @@ import hoverSoundFile from "../audio/hover.wav";
 import clickSoundFile from "../audio/click.wav";
 import React, { useState } from 'react';
 
-
-
-export default function Carte( {onClick, className = "", credit = "" , life = "", nom = "",description = "", attack = "", imageURL = "" , state = ""}){
+export default function Carte({ onClick, className = "", credit = "", life = "", nom = "", description = "", attack = "", imageURL = "", state = "" }) {
     const [isActive, setIsActive] = useState(false);
 
     const changeStyleCarte = () => {
         setIsActive(!isActive);
     }
-    //     const [buttonStyle, setButtonStyle] = useState({
-    //     backgroundColor: 'blue',
-    //     color: 'white',
-    //     padding: '10px',});
-    
 
     const handleClick = (e) => {
         if (onClick) onClick(e);
     };
-    
-    
 
+    return (
+        <div 
+            onClick={handleClick} 
+            className={`text-gray-200 relative rounded border bg-gray-950 border-slate-400 hover:bg-slate-600 flex flex-col ${className}`}
+        >
+            {/* Symbole de crédit - DÉCALÉ à gauche */}
+            <div className="absolute top-0 -left-5 w-4 h-4 bg-[url(/images/credit_symbol.png)] bg-cover bg-no-repeat z-10">
+                <p className="absolute text-[9px] font-bold top-0 left-5 text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                    {credit}
+                </p>
+            </div>
 
-    return <div onClick={handleClick} className={"text-gray-200 relative text-[10px] rounded border bg-gray-950 border-slate-400 p-1 hover:bg-slate-600 w-36 h-56 justify-items-center " + className}>
-                <img className="rounded border w-25 h-25 justify-center " src="/images/sabre.jpg" />
-                <div className="rounded border-0 w-5 h-5 absolute top-0 -left-6 bg-[url(/images/credit_symbol.png)] bg-cover bg-no-repeat ">
-                    <p className="absolute text-[12px] top-0 left-7 opacity-75 ">
-                        {credit}
+            {/* Image de la carte - CENTRÉE */}
+            <div className="w-full h-[35%] p-1 flex items-center justify-center">
+                <img 
+                    className="rounded border max-w-[75%] max-h-full object-contain" 
+                    src="/images/sabre.jpg" 
+                    alt={nom}
+                />
+            </div>
+
+            {/* Nom de la carte */}
+            <div className="px-1 py-0.5 text-center border-t border-slate-400">
+                <label className="text-[0.55em] font-semibold leading-tight line-clamp-1 block">
+                    {nom}
+                </label>
+            </div>
+
+            {/* Description - PLUS D'ESPACE */}
+            <div className="flex-1 px-1 py-1 border-t border-slate-400 overflow-hidden">
+                <p className="text-[0.45em] leading-tight line-clamp-4">
+                    {description}
+                </p>
+            </div>
+
+            {/* Stats du bas - Attaque et Vie - TEXTE RÉDUIT */}
+            <div className="px-1 py-0.5 border-t border-slate-400 flex justify-between items-center relative text-[0.65em]">
+                {/* Attaque */}
+                <div className="font-bold">
+                    {attack}
+                </div>
+
+                {/* Vie avec symbole médical - DÉCALÉ à droite */}
+                <div className="absolute -right-5 top-0 w-4 h-4 bg-[url(/images/medical_symbol.png)] bg-cover bg-no-repeat">
+                    <p className="absolute text-[9px] font-bold top-0 -left-6 text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
+                        {life}
                     </p>
                 </div>
-                
-                <div className="rounded border w-35 h-10 text-center ">
-                    <label className="ml-2" >
-                    {nom}
-                    </label>
-                </div>
-                
-                <div className="rounded border w-35 h-15 col-span-1 ">
-                    {description}
-                    </div> 
-      	        <div className="rounded border w-35 h-5 flex justify-between px-2">
-                    <div className="rounded-lg ">
-                        {attack}
-                    </div> 
-                    <div className="rounded-lg w-5 h-5 absolute top-51 left-36 bg-[url(/images/medical_symbol.png)] bg-cover bg-no-repeat ">
-                        <p className="absolute text-[12px] top-0 -left-8 opacity-75 ">
-                            {life}
-                        </p>
-                    </div> 
-                </div> 
-                
             </div>
+        </div>
+    );
 }
-

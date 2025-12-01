@@ -19,8 +19,10 @@ export default function Lobby() {
     }
 
     const applyStyles = ()=> {
-	let styles = {
-		fontGoogleName : "Sofia",
+    
+
+    let styles = {
+        fontGoogleName : "Sofia",
         fontSize : "18px",
         backgroundColor: "rgba(0, 20, 40, 0.4)",   // style holo
         fontColor: "#00ffff",                      // cyan
@@ -30,8 +32,8 @@ export default function Lobby() {
         memberListBackgroundColor: "rgba(0, 20, 40, 0.2)",
         memberListFontColor: "#00ffff",
         hideScrollBar: true,
-        noScrolling : true
-	}
+        noScrolling : true,
+    }
 	
 	setTimeout(() => {
 		chatRef.current.contentWindow.postMessage(JSON.stringify(styles), "*");	
@@ -109,16 +111,18 @@ export default function Lobby() {
             {showNotes && <Note close={() => {fermerNotes()}} />}
 
             <div className="flex flex-row h-full w-full">
-                <div className="w-1/4 h-full holo-container flex flex-col text-cyan-300 border border-cyan-300/40 bg-cyan-900/20 backdrop-blur-sm relative overflow-hidden scan-lines">
+                <div className="w-full md:w-1/4 h-full holo-container flex flex-col text-cyan-300 border border-cyan-300/40 bg-cyan-900/20 backdrop-blur-sm relative overflow-hidden scan-lines">
                     <div className="animate-holo-glitch absolute inset-0 pointer-events-none opacity-20 bg-linear-to-r from-cyan-500/20 to-blue-500/20"></div>
-                    <div className="flex flex-col items-center justify-center gap-y-35 mt-20">
-                        <img />
-                        <Button className="h-20 border-6" onClick={() => jouer("TRAINING")}>pratique (Joueur contre l'IA)</Button>
-                        <Button className="h-20 border-6" onClick={() => jouer("PVP")}>jouer (Joueur contre joueur)</Button>
-                        <Button className="h-20 border-6" onClick={() => goToLogin()}>quitter (Retour au loggin)</Button>
-                        <Button className="h-20 border-6" onClick={() => ouvrirNotes()}>Les Notes</Button>
-                        <div className="border-8 border-cyan-900">
-                            <h1 className=" text-6xl text-cyan-900">Menu principal</h1>
+                    <div className="flex flex-col items-stretch justify-between py-8 px-4 h-full">
+                        <img className="mx-auto mb-4" />
+                        <div className="flex flex-col gap-4">
+                            <Button className="w-full h-20 border-6" onClick={() => jouer("TRAINING")}>pratique (Joueur contre l'IA)</Button>
+                            <Button className="w-full h-20 border-6" onClick={() => jouer("PVP")}>jouer (Joueur contre joueur)</Button>
+                            <Button className="w-full h-20 border-6" onClick={() => goToLogin()}>quitter (Retour au loggin)</Button>
+                            <Button className="w-full h-20 border-6" onClick={() => ouvrirNotes()}>Les Notes</Button>
+                        </div>
+                        <div className="border-8 border-cyan-800 p-2 mt-4 ">
+                            <h1 className="text-2xl md:text-5xl text-cyan-200 text-center">Menu principal</h1>
                         </div>
                     </div>
                 </div>
@@ -133,12 +137,14 @@ export default function Lobby() {
                 </div>
             </div>
 
-            <div className="absolute bottom-0 left-1/4 w-3/4 h-1/5 holo-container border border-cyan-300/40 bg-cyan-900/10 backdrop-blur-sm overflow-hidden scan-lines">
+            <div className="absolute bottom-0 left-1/4 w-3/4 h-1/2 md:h-1/3 lg:h-1/4 holo-container border border-cyan-300/40 bg-cyan-900/10 backdrop-blur-sm overflow-auto scan-lines">
                 <iframe
                     ref={chatRef}
                     onLoad={appliquerFonctions}
-                    className="w-full h-full border border-cyan-300/30 bg-cyan-900/20 backdrop-blur-sm overflow-hidden"
+                    noScrolling={true}
                     scrolling="no"
+                    hideScrollBar={true}
+                    className="w-full h-full border border-cyan-300/30 bg-cyan-900/20 backdrop-blur-sm overflow-auto"
                     src={`https://magix.apps-de-cours.com/server/chat/${reponseServeur}`}
                 ></iframe>
             </div>

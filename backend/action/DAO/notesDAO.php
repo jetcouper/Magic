@@ -20,4 +20,22 @@
             $statement->bindParam(3, $date_note);
             $statement->execute();
         }
+
+        public static function updateNotes($id, $sujet, $description, $date_note) {
+            // Abstraction de BD
+            $connection = Connection::getConnection();
+            $statement = $connection->prepare("UPDATE notes SET sujet = ?, description = ?, date_note = ? WHERE id = ?");
+            $statement->bindParam(1, $sujet);
+            $statement->bindParam(2, $description);
+            $statement->bindParam(3, $date_note);
+            $statement->bindParam(4, $id);
+            $statement->execute();
+        }
+        public static function deleteNotes($id) {
+            // Abstraction de BD
+            $connection = Connection::getConnection();
+            $statement = $connection->prepare("DELETE FROM notes WHERE id = ?");
+            $statement->bindParam(1, $id);
+            $statement->execute();
+        }
     }

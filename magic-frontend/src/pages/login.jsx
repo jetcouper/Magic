@@ -112,7 +112,7 @@ export default function Login() {
                                     type="submit" 
                                     className="w-full "
                                 >
-                                    ACCÈS AUTORISÉ
+                                    LOGIN
                                 </Button>
                                 
                                 {/* Message d'erreur */}

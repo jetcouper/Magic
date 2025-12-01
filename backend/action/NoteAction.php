@@ -14,8 +14,20 @@
                 $sujet = $_POST["sujet"];
                 $description = $_POST["description"];
                 $date_note = $_POST["date_note"];
-                NoteDAO::addNotes($sujet, $description, $date_note);
-                
+
+                if(isset($_POST["id"])){
+                    $id = $_POST["id"];
+                    NoteDAO::updateNotes($id, $sujet, $description, $date_note);
+                    $result = NoteDAO::getNotes();
+                    return compact("result");
+                }
+                else{
+                    NoteDAO::addNotes($sujet, $description, $date_note);
+                }
+            }
+            if(isset($_POST["delete_id"])){
+                $id = $_POST["delete_id"];
+                NoteDAO::deleteNotes($id);
             }
 
             $result = NoteDAO::getNotes();
