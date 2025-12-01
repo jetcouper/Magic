@@ -6,7 +6,7 @@
         public static function getNotes() {
             // Abstraction de BD
             $connection = Connection::getConnection();
-            $statement = $connection->prepare("SELECT * FROM notes");
+            $statement = $connection->prepare("SELECT * FROM notes ORDER BY id ASC");
             $statement->execute();
             $allRows = $statement->fetchAll(); // Retourne un tableau de toutes les lignes
             return $allRows;

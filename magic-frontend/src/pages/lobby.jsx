@@ -29,6 +29,7 @@ export default function Lobby() {
         borderColor: "#00bcd4",
         inputBackgroundColor: "rgba(0, 20, 40, 0.3)",
         inputFontColor: "#00eaff",
+        inputPadding: "15px",
         memberListBackgroundColor: "rgba(0, 20, 40, 0.2)",
         memberListFontColor: "#00ffff",
         hideScrollBar: true,
@@ -137,7 +138,7 @@ export default function Lobby() {
                 </div>
             </div>
 
-            <div className="absolute bottom-0 left-1/4 w-3/4 h-1/2 md:h-1/3 lg:h-1/4 holo-container border border-cyan-300/40 bg-cyan-900/10 backdrop-blur-sm overflow-auto scan-lines">
+            <div className="absolute bottom-0 left-1/4 w-3/4 h-1/2 md:h-1/3 lg:h-[22%] holo-container border border-cyan-300/40 bg-cyan-900/10 backdrop-blur-sm overflow-auto scan-lines">
                 <iframe
                     ref={chatRef}
                     onLoad={appliquerFonctions}

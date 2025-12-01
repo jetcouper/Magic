@@ -137,7 +137,7 @@ export default function Jeu() {
     }
 
     return <MainLayout title="Jeu" onLoad={recupererKey}>
-        <div className="flex flex-col mx-auto md:h-screen">
+        <div className="flex flex-col mx-auto h-screen overflow-hidden">
             <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-cover -z-10">
                 <source src={"/video/battle-of-geonosis-star-wars.3840x2160.mp4"} type="video/mp4" />
             </video>
@@ -160,7 +160,7 @@ export default function Jeu() {
                     </div>
 
                     {/* Info adversaire centrale avec message */}
-                    <div className="flex items-center justify-center gap-2 overflow-visible relative">
+                    <div className="flex items-center justify-center gap-2 relative">
                         <label className="truncate text-sm">{etatJeu?.opponent?.username}</label>
                         <div onClick={() => attaque("ATTACK", maCarte.uid, 0)} className="w-24 h-24 shrink-0 rounded-full bg-[url(/images/warrior.jpg)] bg-cover bg-center border-4 shadow-lg cursor-pointer">
                         </div>
@@ -191,7 +191,7 @@ export default function Jeu() {
             </div>
 
             {/* Board adversaire */}
-            <div className="w-full h-[25%] overflow-x-auto">
+            <div className="w-full h-[25%] overflow-visible py-8">
                 <div className="w-full h-full font-semibold rounded-md gap-6 flex items-center justify-center text-center p-2">
                     {
                         etatJeu?.opponent?.board?.map((carte) => {
@@ -203,7 +203,7 @@ export default function Jeu() {
                                 life={carte.hp}
                                 description={carte.mechanics.join(", ")}
                                 attack={carte.atk}
-                                className="shrink-0 w-16 h-24 sm:w-24 sm:h-44"
+                                className="shrink-0 w-16 h-24 sm:w-24 sm:h-44 hover:scale-[1.5] hover:z-50"
                             />
                         })
                     }
@@ -211,7 +211,7 @@ export default function Jeu() {
             </div>
 
             {/* Mon board */}
-            <div className="w-full h-[25%] overflow-x-auto">
+            <div className="w-full h-[25%] overflow-visible py-8">
                 <div className="w-full h-full font-semibold rounded-md gap-6 text-gray-900 bg-transparent flex items-center justify-center text-center p-2">
                     {
                         etatJeu?.board?.map((carte) => {
@@ -223,7 +223,7 @@ export default function Jeu() {
                                 life={carte.hp}
                                 description={carte.mechanics.join(", ")}
                                 attack={carte.atk}
-                                className="shrink-0 w-16 h-24 sm:w-24 sm:h-44"
+                                className="shrink-0 w-16 h-24 sm:w-24 sm:h-44 hover:scale-[1.5] hover:z-50"
                             />
                         })
                     }
@@ -231,7 +231,7 @@ export default function Jeu() {
             </div>
 
             {/* Zone joueur */}
-            <div className="w-full h-[30%] border-2 gap-2 holo-container p-4 text-cyan-300 border-cyan-300/40 bg-cyan-900/10 backdrop-blur-sm relative overflow-hidden scan-lines">
+            <div className="w-full h-[30%] border-2 gap-2 holo-container p-4 text-cyan-300 border-cyan-300/40 bg-cyan-900/10 backdrop-blur-sm relative scan-lines">
                 <div className="animate-holo-glitch absolute inset-0 pointer-events-none opacity-20 bg-linear-to-r from-cyan-500/20 to-blue-500/20"></div>
                 <div className="w-full h-full font-semibold rounded-md flex items-center justify-between text-center">
 
@@ -249,7 +249,7 @@ export default function Jeu() {
                     </div>
 
                     {/* Ma main - SANS text-2xl */}
-                    <div className="flex-1 flex gap-6 items-center justify-center overflow-x-auto mx-2">
+                    <div className="flex-1 flex gap-6 items-center justify-center overflow-visible mx-2 py-8">
                         {
                             etatJeu?.hand?.map((carte) => {
                                 return <Carte
@@ -260,7 +260,7 @@ export default function Jeu() {
                                     life={carte.hp}
                                     description={carte.mechanics.join(", ")}
                                     attack={carte.atk}
-                                    className="shrink-0 w-20 h-28 sm:w-24 sm:h-44"
+                                    className="shrink-0 w-20 h-28 sm:w-24 sm:h-44 hover:scale-[2] hover:z-50"
                                 />
                             })
                         }
