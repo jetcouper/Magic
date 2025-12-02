@@ -1,22 +1,19 @@
-import { useRef } from "react";
 import { useNavigate } from "react-router";
 import Button from "../components/button";
 
-export default function defaite(){
+export default function Defaite() {
     const navigate = useNavigate();
 
-    
     const verslobby = () => {
         navigate("/lobby");
     }
 
-    return <div className="">
-        <h1>
-            defaite
-        </h1>
-        <Button  onClick={() => verslobby()}>
-            quitter
-        </Button>
-
-    </div>
+    return (
+        <div className="relative text-center rounded-2xl holo-container bg-cyan-800/75 p-4">
+            <div className="animate-holo-glitch absolute inset-0 pointer-events-none opacity-20 bg-linear-to-r from-cyan-500/20 to-blue-500/20"></div>
+            <h1 className="text-red-500 text-4xl mb-4">Défaite</h1>
+            <p className="text-sm text-cyan-300 mb-4">Dommage, vous avez perdu cette fois.</p>
+            <Button onClick={verslobby}>Quitter</Button>
+        </div>
+    );
 }

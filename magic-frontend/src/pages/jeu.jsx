@@ -5,6 +5,8 @@ import Button from "../components/button";
 import logo from '../assets/img/logo.png'
 import { useNavigate } from "react-router";
 import cartes from "../javascript/cartes";
+import Victoire from "./victoire";
+import Defaite from "./defaite";
 
 
 export default function Jeu() {
@@ -15,8 +17,35 @@ export default function Jeu() {
     const [maCarte, setMaCarte] = useState({})
     const [carteAdverse, setCarteAdverse] = useState({})
     const [showMessage, setShowMessage] = useState(false);
+    const [showChat, setShowChat] = useState(false);
+    const [gameOutcome, setGameOutcome] = useState(null); // "LAST_GAME_WON" | "LAST_GAME_LOST" | null
+    const [showOutcomeModal, setShowOutcomeModal] = useState(false);
     const stateTimeout = useRef(null)
     const cartejeu = cartes
+
+    const applyStyles = () => {
+        let styles = {
+            
+            fontGoogleName: "Sofia",
+            fontSize: "18px",
+            backgroundColor: "rgba(0, 20, 40, 0.4)",   // style holo
+            fontColor: "#00ffff",                      // cyan
+            borderColor: "#00bcd4",
+            inputBackgroundColor: "rgba(0, 20, 40, 0.3)",
+            inputFontColor: "#00eaff",
+            inputPadding: "15px",
+            memberListBackgroundColor: "rgba(0, 20, 40, 0.2)",
+            memberListFontColor: "#00ffff",
+            hideScrollBar: true,
+            noScrolling: true,
+        }
+        setTimeout(() => {
+            chatRef.current.contentWindow.postMessage(JSON.stringify(styles), "*");
+            console.log(cleServeur);
+        }, 100);
+    }
+
+
 
     useEffect(() => {
         if (messageErreur != "") {
@@ -30,7 +59,28 @@ export default function Jeu() {
             .then(response => response.json())
             .then(response => {
                 console.log(response)
-                setEtatJeu(response.result)
+
+                const res = response.result;
+
+                // Si le serveur renvoie un simple statut de résultat de la dernière partie
+                if (res === "WAITING") {
+                    console.log("En attente d'un adversaire...")
+                }
+                else if (res === "LAST_GAME_WON") {
+                    console.log("Vous avez gagné la dernière partie !")
+                    setGameOutcome("LAST_GAME_WON");
+                    setShowOutcomeModal(true);
+                }
+                else if (res === "LAST_GAME_LOST") {
+                    console.log("Vous avez perdu la dernière partie !")
+                    setGameOutcome("LAST_GAME_LOST");
+                    setShowOutcomeModal(true);
+                }
+                // Si c'est un objet d'état de jeu complet, on l'applique
+                else if (typeof res === 'object' && res !== null) {
+                    setEtatJeu(res)
+                }
+
                 stateTimeout.current = setTimeout(fetchState, 2000);
             });
     }
@@ -46,6 +96,13 @@ export default function Jeu() {
         }
     }, []);
 
+    // Récupérer la clé serveur au montage (MainLayout n'appelle pas onLoad)
+    useEffect(() => {
+        recupererKey();
+    }, []);
+
+    
+
     const recupererKey = () => {
         fetch("/api/lobby.php")
             .then(response => response.json())
@@ -57,6 +114,9 @@ export default function Jeu() {
 
     const choisirCardBoard = ($carte) => {
         setMaCarte($carte)
+    }
+    const chat = () =>{
+        setShowChat(true);
     }
 
     const attaque = ($type, $carte, $carteAdverse) => {
@@ -260,7 +320,7 @@ export default function Jeu() {
                                     life={carte.hp}
                                     description={carte.mechanics.join(", ")}
                                     attack={carte.atk}
-                                    className="shrink-0 w-20 h-28 sm:w-24 sm:h-44 hover:scale-[2] hover:z-50"
+                                    className="shrink-0 w-20 h-28 sm:w-24 sm:h-44 hover:scale-[1.5] hover:z-50"
                                 />
                             })
                         }
@@ -277,6 +337,9 @@ export default function Jeu() {
                         <Button className="text-xs whitespace-nowrap" onClick={() => jouerBouton("SURRENDER")}>
                             Abandon
                         </Button>
+                        <Button className="text-xs whitespace-nowrap" onClick={() => chat()}>
+                            Chat
+                        </Button>
                         <div className="text-3xl flex items-center justify-center gap-1">
                             <div className="bg-[url(/images/sand-hourglass-timer.png)] w-16 h-16 bg-contain bg-no-repeat">
                             </div>
@@ -285,6 +348,38 @@ export default function Jeu() {
                     </div>
                 </div>
             </div>
+            {/* Outcome modal (victoire / défaite) */}
+            {showOutcomeModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+                    <div className="pt-6">
+                        {gameOutcome === "LAST_GAME_WON" && <Victoire />}
+                        {gameOutcome === "LAST_GAME_LOST" && <Defaite />}
+                    </div>
+                </div>
+            )}
+
+            {/* Iframe chat */}
+            {showChat && (
+                <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+                    <div className="relative bg-white/5 rounded-xl shadow-2xl w-full max-w-x1 mx-4 p-3 sm:p-4 holo-container">
+                    <div className="animate-holo-glitch absolute inset-0 pointer-events-none opacity-20 bg-linear-to-r from-cyan-500/20 to-blue-500/20"></div>
+                        <div className="absolute top-2 right-2">
+                            <Button className="text-xs" onClick={() => setShowChat(false)}>Fermer</Button>
+                        </div>
+                        <div className="w-full h-[60vh] sm:h-[30vh] bg-transparent rounded-md overflow-hidden border border-cyan-300/20">
+                            <iframe
+                                ref={chatRef}
+                                onLoad={applyStyles}
+                                noScrolling={true}
+                                scrolling="no"
+                                hideScrollBar={true}
+                                className="w-full h-full bg-transparent"
+                                src={`https://magix.apps-de-cours.com/server/chat/${cleServeur}`}
+                            ></iframe>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     </MainLayout>
 }
