@@ -67,6 +67,45 @@
   }
 }
 
+@keyframes pulse-glow-green {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(34, 197, 94, 0.6),
+                0 0 50px rgba(34, 197, 94, 0.3),
+                inset 0 0 20px rgba(34, 197, 94, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(34, 197, 94, 0.8),
+                0 0 80px rgba(34, 197, 94, 0.5),
+                inset 0 0 30px rgba(34, 197, 94, 0.2);
+  }
+}
+
+@keyframes pulse-glow-red {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.6),
+                0 0 50px rgba(239, 68, 68, 0.3),
+                inset 0 0 20px rgba(239, 68, 68, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(239, 68, 68, 0.8),
+                0 0 80px rgba(239, 68, 68, 0.5),
+                inset 0 0 30px rgba(239, 68, 68, 0.2);
+  }
+}
+
+@keyframes pulse-glow-yellow {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(234, 179, 8, 0.6),
+                0 0 50px rgba(234, 179, 8, 0.3),
+                inset 0 0 20px rgba(234, 179, 8, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(234, 179, 8, 0.8),
+                0 0 80px rgba(234, 179, 8, 0.5),
+                inset 0 0 30px rgba(234, 179, 8, 0.2);
+  }
+}
+
 /* Animation du faisceau de projection */
 @keyframes projection-beam {
   0% { 
@@ -136,162 +175,24 @@
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
+.animate-pulse-glow-green {
+  animation: pulse-glow-green 2s ease-in-out infinite;
+}
+
+.animate-pulse-glow-red {
+  animation: pulse-glow-red 2s ease-in-out infinite;
+}
+
+.animate-pulse-glow-yellow {
+  animation: pulse-glow-yellow 2s ease-in-out infinite;
+}
+
 /* Combinaison des effets pour le container principal */
 .holo-container {
   animation: 
     pulse-glow 2s ease-in-out infinite;
 }
 
-/* ================================
-   EFFET DE PROJECTION HOLOGRAPHIQUE
-   ================================ */
-
-/* Base du projecteur (communicateur) */
-.holo-projector {
-  position: relative;
-  width: 120px;
-  height: 40px;
-  margin: 0 auto 20px;
-  background: linear-gradient(180deg, 
-    rgba(15, 23, 42, 0.9) 0%, 
-    rgba(30, 41, 59, 0.8) 100%);
-  border: 2px solid rgba(34, 211, 238, 0.4);
-  border-radius: 8px;
-  box-shadow: 
-    0 0 20px rgba(34, 211, 238, 0.6),
-    inset 0 0 10px rgba(34, 211, 238, 0.2);
-  animation: projector-pulse 2s ease-in-out infinite;
-}
-
-/* Lumière du projecteur */
-.holo-projector::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60%;
-  height: 8px;
-  background: radial-gradient(ellipse at center, 
-    rgba(34, 211, 238, 1) 0%, 
-    rgba(34, 211, 238, 0.6) 50%, 
-    transparent 100%);
-  border-radius: 50%;
-  filter: blur(3px);
-}
-
-/* Indicateurs lumineux sur le projecteur */
-.holo-projector::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 12px;
-  height: 12px;
-  background: rgba(34, 211, 238, 0.8);
-  border-radius: 50%;
-  box-shadow: 
-    0 0 10px rgba(34, 211, 238, 1),
-    0 0 20px rgba(34, 211, 238, 0.8);
-  animation: projector-pulse 1s ease-in-out infinite;
-}
-
-/* Faisceau de lumière conique */
-.projection-beam {
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 300px;
-  background: linear-gradient(to top, 
-    rgba(34, 211, 238, 0.4) 0%,
-    rgba(34, 211, 238, 0.2) 30%,
-    rgba(34, 211, 238, 0.1) 60%,
-    transparent 100%);
-  clip-path: polygon(40% 100%, 0% 0%, 100% 0%, 60% 100%);
-  filter: blur(8px);
-  animation: projection-beam 2s ease-in-out infinite;
-  pointer-events: none;
-}
-
-/* Deuxième couche de faisceau pour plus de profondeur */
-.projection-beam::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 100%;
-  background: linear-gradient(to top, 
-    rgba(34, 211, 238, 0.3) 0%,
-    rgba(34, 211, 238, 0.15) 40%,
-    transparent 70%);
-  clip-path: polygon(45% 100%, 10% 0%, 90% 0%, 55% 100%);
-  filter: blur(4px);
-}
-
-/* Particules montantes dans le faisceau */
-.projection-particles {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.projection-particles::before,
-.projection-particles::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  width: 2px;
-  height: 2px;
-  background: rgba(34, 211, 238, 0.8);
-  border-radius: 50%;
-  box-shadow: 
-    0 0 5px rgba(34, 211, 238, 1),
-    0 0 10px rgba(34, 211, 238, 0.8);
-  animation: particles-rise 3s linear infinite;
-}
-
-.projection-particles::before {
-  left: 30%;
-  animation-delay: 0s;
-}
-
-.projection-particles::after {
-  left: 70%;
-  animation-delay: 1.5s;
-}
-
-/* ================================
-   BOUTON HOLOGRAPHIQUE
-   ================================ */
-
-.holographic-button {
-  background: linear-gradient(45deg, #ff0099, #493240, #f6f, #b6f, #50c878);
-  background-size: 200% 200%;
-  animation: moveGradient 4s ease infinite;
-  padding: 15px 30px;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.2em;
-  cursor: pointer;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
-}
-
-@keyframes moveGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
 
 /* ================================
    POLICE STAR WARS
@@ -356,31 +257,25 @@ html, body, section {
   border-radius: 0.5rem; /* align with rounded */
   mix-blend-mode: screen;
   opacity: 0.9;
-  background: linear-gradient(90deg, rgba(34,211,238,0.06) 0%, rgba(99,102,241,0.04) 30%, rgba(236,72,153,0.03) 60%, rgba(34,211,238,0.05) 100%);
-  background-size: 200% 200%;
-  animation: moveGradient 4s ease infinite, holo-wobble 2.2s ease-in-out infinite alternate;
-  box-shadow: inset 0 0 18px rgba(255,255,255,0.02);
+  background: transparent;
+  animation: holo-wobble 2.2s ease-in-out infinite alternate;
 }
 
 /* Color variants */
 .holo-cyan {
   background: linear-gradient(90deg, rgba(34,211,238,0.12) 0%, rgba(34,211,238,0.06) 30%, rgba(125,211,252,0.03) 60%, rgba(34,211,238,0.08) 100%);
-  box-shadow: 0 0 12px rgba(34,211,238,0.12), inset 0 0 24px rgba(34,211,238,0.03);
 }
 
 .holo-green {
   background: linear-gradient(90deg, rgba(34,197,94,0.12) 0%, rgba(34,197,94,0.06) 30%, rgba(134,239,172,0.03) 60%, rgba(34,197,94,0.08) 100%);
-  box-shadow: 0 0 12px rgba(34,197,94,0.12), inset 0 0 24px rgba(34,197,94,0.03);
 }
 
 .holo-red {
   background: linear-gradient(90deg, rgba(239,68,68,0.12) 0%, rgba(239,68,68,0.06) 30%, rgba(252,165,165,0.03) 60%, rgba(239,68,68,0.08) 100%);
-  box-shadow: 0 0 12px rgba(239,68,68,0.12), inset 0 0 24px rgba(239,68,68,0.03);
 }
 
 .holo-yellow {
   background: linear-gradient(90deg, rgba(234,179,8,0.12) 0%, rgba(234,179,8,0.06) 30%, rgba(252,211,77,0.03) 60%, rgba(234,179,8,0.08) 100%);
-  box-shadow: 0 0 12px rgba(234,179,8,0.12), inset 0 0 24px rgba(234,179,8,0.03);
 }
 
 /* Optional thin scan lines on top of overlay */
@@ -392,28 +287,4 @@ html, body, section {
   mix-blend-mode: overlay;
   pointer-events: none;
   opacity: 0.6;
-}
-
-/* ================================
-   GLITCH COLOR VARIANTS FOR CARDS
-   ================================ */
-
-.holo-glitch-cyan {
-  background: linear-gradient(135deg, rgba(34, 211, 238, 0.08) 0%, transparent 50%, rgba(34, 211, 238, 0.04) 100%);
-  box-shadow: 0 0 20px rgba(34, 211, 238, 0.5), inset 0 0 15px rgba(34, 211, 238, 0.15);
-}
-
-.holo-glitch-green {
-  background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, transparent 50%, rgba(34, 197, 94, 0.04) 100%);
-  box-shadow: 0 0 20px rgba(34, 197, 94, 0.5), inset 0 0 15px rgba(34, 197, 94, 0.15);
-}
-
-.holo-glitch-red {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, transparent 50%, rgba(239, 68, 68, 0.04) 100%);
-  box-shadow: 0 0 20px rgba(239, 68, 68, 0.5), inset 0 0 15px rgba(239, 68, 68, 0.15);
-}
-
-.holo-glitch-yellow {
-  background: linear-gradient(135deg, rgba(234, 179, 8, 0.08) 0%, transparent 50%, rgba(234, 179, 8, 0.04) 100%);
-  box-shadow: 0 0 20px rgba(234, 179, 8, 0.5), inset 0 0 15px rgba(234, 179, 8, 0.15);
 }
