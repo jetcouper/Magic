@@ -1,0 +1,34 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# API Keys et Variables d'Environnement
+.env
+.env.local
+.env.*.local
+
+# Images Générées
+generated-images/
+test-images/
+*.png
+*.jpg
+*.jpeg
+
+# Système
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporaire
+temp/
+tmp/
