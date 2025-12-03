@@ -14,7 +14,6 @@ export default function Carte({ onClick, className = "", credit = "", life = "",
         if (onClick) onClick(e);
     };
 
-    // map mechanics to holo color and animation class
     const mechanicToClass = {
         "Charge": { color: 'holo-yellow', anim: 'animate-pulse-glow-yellow' },
         "Taunt": { color: 'holo-indigo', anim: 'animate-pulse-glow-indigo' },
@@ -24,48 +23,35 @@ export default function Carte({ onClick, className = "", credit = "", life = "",
         "Deathrattle": { color: 'holo-green', anim: 'animate-pulse-glow-green' }
     };
 
-    // map state prop to holo color and animation class
     const stateToClass = {
         "IDLE": { color: 'holo-cyan', anim: 'animate-pulse-glow' },
         "SLEEP": { color: 'holo-red', anim: 'animate-pulse-glow-red' }
     };
 
-    // Check color priority: SLEEP state first, then mechanics, then other states
     let holoColor = 'holo-cyan';
     let holoAnim = 'animate-pulse-glow';
-    
-    // Debug: log mechanics
-    //console.log(`Carte "${nom}" - Mechanics:`, mechanics, `State: ${state}`);
-    
-    // PRIORITY 1: If state is SLEEP, always use red
+
     if (state === "SLEEP") {
-        //console.log(`  -> SLEEP détecté - PRIORITÉ`);
         holoColor = stateToClass["SLEEP"].color;
         holoAnim = stateToClass["SLEEP"].anim;
     }
-    // PRIORITY 2: Check for special mechanics
     else if (mechanics && mechanics.length > 0) {
         for (let mechanic of mechanics) {
-            // Check if the mechanic string contains any of our keywords
             for (let keyword in mechanicToClass) {
                 if (mechanic.includes(keyword)) {
-                    //console.log(`  -> Trouvé "${keyword}" dans "${mechanic}"`);
                     holoColor = mechanicToClass[keyword].color;
                     holoAnim = mechanicToClass[keyword].anim;
                     break;
                 }
             }
-            if (holoColor !== 'holo-cyan') break; // Stop if we found a match
+            if (holoColor !== 'holo-cyan') break;
         }
     }
-    // PRIORITY 3: Use other states (IDLE)
+    
     else if (stateToClass[state]) {
-        //console.log(`  -> Utilise state: ${state}`);
         holoColor = stateToClass[state].color;
         holoAnim = stateToClass[state].anim;
     }
-    
-    //console.log(`  -> Couleur finale: ${holoColor}`);
     
 
     return (

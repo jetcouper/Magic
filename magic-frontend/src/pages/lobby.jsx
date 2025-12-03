@@ -4,12 +4,13 @@ import Button from "../components/button";
 import logo from '../assets/img/logo.png'
 import { useNavigate } from "react-router";
 import Note from "./note.jsx";
+import Deck from "./deck.jsx";
 
 export default function Lobby() {
     const chatRef = useRef(null);
     const [reponseServeur, setReponse] = useState("");
     const [showNotes, setShowNotes] = useState(false);
-    const [reponseServeurType, setType] = useState("");
+    const [showDeck, setShowDeck] = useState(false);
     const navigate = useNavigate();
 
     
@@ -67,9 +68,18 @@ export default function Lobby() {
             navigate("/");
         })
     }
+    const ouvrirDeck = () =>{
+        setShowDeck(true)
+    }
+    const fermerDeck = () =>{
+        setShowDeck(false)
+    }
+
     const ouvrirNotes = () =>{
         setShowNotes(true);
     }
+
+
     const fermerNotes = () =>{
         setShowNotes(false);
     }
@@ -110,7 +120,7 @@ export default function Lobby() {
                 <source src={"/video/star-wars-space.1920x1080.mp4"} type="video/mp4"/>
             </video>
             {showNotes && <Note close={() => {fermerNotes()}} />}
-
+            {showDeck && <Deck recupererCle={reponseServeur} close={() => {fermerDeck()}} />}
             <div className="flex flex-row h-full w-full">
                 <div className="w-full md:w-1/4 h-full holo-container flex flex-col text-cyan-300 border border-cyan-300/40 bg-cyan-900/20 backdrop-blur-sm relative overflow-hidden scan-lines">
                     <div className="animate-holo-glitch absolute inset-0 pointer-events-none opacity-20 bg-linear-to-r from-cyan-500/20 to-blue-500/20"></div>
@@ -121,6 +131,7 @@ export default function Lobby() {
                             <Button className="w-full h-20 border-6" onClick={() => jouer("PVP")}>jouer (Joueur contre joueur)</Button>
                             <Button className="w-full h-20 border-6" onClick={() => goToLogin()}>quitter (Retour au loggin)</Button>
                             <Button className="w-full h-20 border-6" onClick={() => ouvrirNotes()}>Les Notes</Button>
+                            <Button className="w-full h-20 border-6" onClick={() => ouvrirDeck()}>Deck</Button>
                         </div>
                         <div className="border-8 border-cyan-800 p-2 mt-4 ">
                             <h1 className="text-2xl md:text-5xl text-cyan-200 text-center">Menu principal</h1>
