@@ -22,7 +22,7 @@ export default function Lobby() {
     
 
     let styles = {
-        fontGoogleName : "Sofia",
+        fontGoogleName : "Share Tech",
         fontSize : "18px",
         backgroundColor: "rgba(0, 20, 40, 0.4)",   // style holo
         fontColor: "#00ffff",                      // cyan

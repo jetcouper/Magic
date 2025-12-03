@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import cartes from "../javascript/cartes";
 import Victoire from "./victoire";
 import Defaite from "./defaite";
+import Loading from "./loading"
 
 
 export default function Jeu() {
@@ -20,13 +21,14 @@ export default function Jeu() {
     const [showChat, setShowChat] = useState(false);
     const [gameOutcome, setGameOutcome] = useState(null); // "LAST_GAME_WON" | "LAST_GAME_LOST" | null
     const [showOutcomeModal, setShowOutcomeModal] = useState(false);
+    const [isLoading, setIsLoading] = useState(true)
     const stateTimeout = useRef(null)
     const cartejeu = cartes
 
     const applyStyles = () => {
         let styles = {
             
-            fontGoogleName: "Sofia",
+            fontGoogleName: "Science Gothic",
             fontSize: "18px",
             backgroundColor: "rgba(0, 20, 40, 0.4)",   // style holo
             fontColor: "#00ffff",                      // cyan
@@ -64,7 +66,7 @@ export default function Jeu() {
 
                 // Si le serveur renvoie un simple statut de résultat de la dernière partie
                 if (res === "WAITING") {
-                    console.log("En attente d'un adversaire...")
+                    setGameOutcome("WAITING");
                 }
                 else if (res === "LAST_GAME_WON") {
                     //console.log("Vous avez gagné la dernière partie !")
@@ -78,6 +80,7 @@ export default function Jeu() {
                 }
                 // Si c'est un objet d'état de jeu complet, on l'applique
                 else if (typeof res === 'object' && res !== null) {
+                    setIsLoading(false)
                     setEtatJeu(res)
                 }
 
@@ -194,6 +197,13 @@ export default function Jeu() {
                     setEtatJeu(data)
                 }
             })
+    }
+    if (isLoading) {
+        return (
+            <div className="fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black">
+                <Loading />
+            </div>
+        );
     }
 
     return <MainLayout title="Jeu" onLoad={recupererKey}>
@@ -363,6 +373,12 @@ export default function Jeu() {
                     </div>
                 </div>
             )}
+            {
+                isLoading ===  true && (<div className="fixed inset-0 z-50 flex items-center justify-center w-full h-full">
+                        {<Loading />}
+                    </div>)
+            }
+
 
             {/* Iframe chat */}
             {showChat && (
