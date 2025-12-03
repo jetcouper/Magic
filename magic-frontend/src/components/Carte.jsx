@@ -3,7 +3,7 @@ import hoverSoundFile from "../audio/hover.wav";
 import clickSoundFile from "../audio/click.wav";
 import React, { useState } from 'react';
 
-export default function Carte({ onClick, className = "", credit = "", life = "", nom = "", description = "", attack = "", imageURL = "", state = "" }) {
+export default function Carte({ onClick, className = "", credit = "", life = "", nom = "", description = "", attack = "", imageURL = "", state = "", mechanics = [] }) {
     const [isActive, setIsActive] = useState(false);
 
     const changeStyleCarte = () => {
@@ -14,20 +14,59 @@ export default function Carte({ onClick, className = "", credit = "", life = "",
         if (onClick) onClick(e);
     };
 
+    // map mechanics to holo color and animation class
+    const mechanicToClass = {
+        "Charge": { color: 'holo-yellow', anim: 'animate-pulse-glow-yellow' },
+        "Taunt": { color: 'holo-indigo', anim: 'animate-pulse-glow-indigo' },
+        "Stealth": { color: 'holo-purple', anim: 'animate-pulse-glow-purple' },
+        "Confused": { color: 'holo-pink', anim: 'animate-pulse-glow-pink' },
+        "Battlecry": { color: 'holo-orange', anim: 'animate-pulse-glow-orange' },
+        "Deathrattle": { color: 'holo-green', anim: 'animate-pulse-glow-green' }
+    };
 
     // map state prop to holo color and animation class
     const stateToClass = {
         "IDLE": { color: 'holo-cyan', anim: 'animate-pulse-glow' },
-        "selected": { color: 'holo-green', anim: 'animate-pulse-glow-green' },
-        "SLEEP": { color: 'holo-red', anim: 'animate-pulse-glow-red' },
-        "buffed": { color: 'holo-green', anim: 'animate-pulse-glow-green' },
-        "exhausted": { color: 'holo-yellow', anim: 'animate-pulse-glow-yellow' }
+        "SLEEP": { color: 'holo-red', anim: 'animate-pulse-glow-red' }
     };
 
-    const { color: holoColor, anim: holoAnim } = stateToClass[state] || { color: 'holo-cyan', anim: 'animate-pulse-glow' };
+    // Check color priority: SLEEP state first, then mechanics, then other states
+    let holoColor = 'holo-cyan';
+    let holoAnim = 'animate-pulse-glow';
     
-    // Debug: log the state to see what's received
-    //console.log(`Carte ${nom} - State reçu: "${state}" -> Couleur: ${holoColor}, Animation: ${holoAnim}`);
+    // Debug: log mechanics
+    //console.log(`Carte "${nom}" - Mechanics:`, mechanics, `State: ${state}`);
+    
+    // PRIORITY 1: If state is SLEEP, always use red
+    if (state === "SLEEP") {
+        //console.log(`  -> SLEEP détecté - PRIORITÉ`);
+        holoColor = stateToClass["SLEEP"].color;
+        holoAnim = stateToClass["SLEEP"].anim;
+    }
+    // PRIORITY 2: Check for special mechanics
+    else if (mechanics && mechanics.length > 0) {
+        for (let mechanic of mechanics) {
+            // Check if the mechanic string contains any of our keywords
+            for (let keyword in mechanicToClass) {
+                if (mechanic.includes(keyword)) {
+                    //console.log(`  -> Trouvé "${keyword}" dans "${mechanic}"`);
+                    holoColor = mechanicToClass[keyword].color;
+                    holoAnim = mechanicToClass[keyword].anim;
+                    break;
+                }
+            }
+            if (holoColor !== 'holo-cyan') break; // Stop if we found a match
+        }
+    }
+    // PRIORITY 3: Use other states (IDLE)
+    else if (stateToClass[state]) {
+        //console.log(`  -> Utilise state: ${state}`);
+        holoColor = stateToClass[state].color;
+        holoAnim = stateToClass[state].anim;
+    }
+    
+    //console.log(`  -> Couleur finale: ${holoColor}`);
+    
 
     return (
         <div 

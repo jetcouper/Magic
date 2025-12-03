@@ -67,12 +67,12 @@ export default function Jeu() {
                     console.log("En attente d'un adversaire...")
                 }
                 else if (res === "LAST_GAME_WON") {
-                    console.log("Vous avez gagné la dernière partie !")
+                    //console.log("Vous avez gagné la dernière partie !")
                     setGameOutcome("LAST_GAME_WON");
                     setShowOutcomeModal(true);
                 }
                 else if (res === "LAST_GAME_LOST") {
-                    console.log("Vous avez perdu la dernière partie !")
+                    //console.log("Vous avez perdu la dernière partie !")
                     setGameOutcome("LAST_GAME_LOST");
                     setShowOutcomeModal(true);
                 }
@@ -256,6 +256,7 @@ export default function Jeu() {
                     {
                         etatJeu?.opponent?.board?.map((carte) => {
                             return <Carte
+                                mechanics={carte.mechanics}
                                 onClick={() => attaque("ATTACK", maCarte.uid, carte.uid)}
                                 key={carte.uid}
                                 nom={cartejeu.find((c) => c.id === carte.id)?.name ?? ""}
@@ -277,6 +278,7 @@ export default function Jeu() {
                     {
                         etatJeu?.board?.map((carte) => {
                             return <Carte
+                                mechanics={carte.mechanics}
                                 onClick={() => choisirCardBoard(carte)}
                                 key={carte.uid}
                                 nom={cartejeu.find((c) => c.id === carte.id)?.name ?? ""}
@@ -315,6 +317,7 @@ export default function Jeu() {
                         {
                             etatJeu?.hand?.map((carte) => {
                                 return <Carte
+                                    mechanics={carte.mechanics}
                                     onClick={() => choisir("PLAY", carte.uid)}
                                     key={carte.uid}
                                     nom={cartejeu.find((c) => c.id === carte.id)?.name ?? ""}

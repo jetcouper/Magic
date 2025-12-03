@@ -4,16 +4,6 @@
    ANIMATIONS HOLOGRAPHIQUES STAR WARS
    ================================ */
 
-/* Animation de fluctuation holographique */
-/* @keyframes holo-fluctuate {
-  0%   { transform: translateX(0) translateY(0) scale(1); opacity: 0.95; }
-  20%  { transform: translateX(-3px) translateY(1px) scale(1.01); opacity: 0.85; }
-  40%  { transform: translateX(2px) translateY(-2px) scale(0.99); opacity: 0.90; }
-  60%  { transform: translateX(-1px) translateY(3px) scale(1.02); opacity: 0.88; }
-  80%  { transform: translateX(1px) translateY(-1px) scale(0.98); opacity: 0.92; }
-  100% { transform: translateX(0) translateY(0) scale(1); opacity: 0.95; }
-} */
-
 /* Animation de glitch/interférence */
 @keyframes holo-glitch {
   0%, 100% { 
@@ -106,6 +96,71 @@
   }
 }
 
+@keyframes pulse-glow-orange {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(249, 115, 22, 0.6),
+                0 0 50px rgba(249, 115, 22, 0.3),
+                inset 0 0 20px rgba(249, 115, 22, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(249, 115, 22, 0.8),
+                0 0 80px rgba(249, 115, 22, 0.5),
+                inset 0 0 30px rgba(249, 115, 22, 0.2);
+  }
+}
+
+@keyframes pulse-glow-indigo {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.6),
+                0 0 50px rgba(99, 102, 241, 0.3),
+                inset 0 0 20px rgba(99, 102, 241, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(99, 102, 241, 0.8),
+                0 0 80px rgba(99, 102, 241, 0.5),
+                inset 0 0 30px rgba(99, 102, 241, 0.2);
+  }
+}
+
+@keyframes pulse-glow-purple {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.6),
+                0 0 50px rgba(168, 85, 247, 0.3),
+                inset 0 0 20px rgba(168, 85, 247, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.8),
+                0 0 80px rgba(168, 85, 247, 0.5),
+                inset 0 0 30px rgba(168, 85, 247, 0.2);
+  }
+}
+
+@keyframes pulse-glow-pink {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(236, 72, 153, 0.6),
+                0 0 50px rgba(236, 72, 153, 0.3),
+                inset 0 0 20px rgba(236, 72, 153, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(236, 72, 153, 0.8),
+                0 0 80px rgba(236, 72, 153, 0.5),
+                inset 0 0 30px rgba(236, 72, 153, 0.2);
+  }
+}
+
+@keyframes pulse-glow-emerald {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.6),
+                0 0 50px rgba(16, 185, 129, 0.3),
+                inset 0 0 20px rgba(16, 185, 129, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.8),
+                0 0 80px rgba(16, 185, 129, 0.5),
+                inset 0 0 30px rgba(16, 185, 129, 0.2);
+  }
+}
+
 /* Animation du faisceau de projection */
 @keyframes projection-beam {
   0% { 
@@ -187,6 +242,26 @@
   animation: pulse-glow-yellow 2s ease-in-out infinite;
 }
 
+.animate-pulse-glow-orange {
+  animation: pulse-glow-orange 2s ease-in-out infinite;
+}
+
+.animate-pulse-glow-indigo {
+  animation: pulse-glow-indigo 2s ease-in-out infinite;
+}
+
+.animate-pulse-glow-purple {
+  animation: pulse-glow-purple 2s ease-in-out infinite;
+}
+
+.animate-pulse-glow-pink {
+  animation: pulse-glow-pink 2s ease-in-out infinite;
+}
+
+.animate-pulse-glow-emerald {
+  animation: pulse-glow-emerald 2s ease-in-out infinite;
+}
+
 /* Combinaison des effets pour le container principal */
 .holo-container {
   animation: 
@@ -254,31 +329,49 @@ html, body, section {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  border-radius: 0.5rem; /* align with rounded */
-  mix-blend-mode: screen;
-  opacity: 0.9;
-  background: transparent;
-  animation: holo-wobble 2.2s ease-in-out infinite alternate;
+  border-radius: 0.5rem; 
+  mix-blend-mode: normal;
+  opacity: 0.7;
 }
 
-/* Color variants */
+
 .holo-cyan {
-  background: linear-gradient(90deg, rgba(34,211,238,0.12) 0%, rgba(34,211,238,0.06) 30%, rgba(125,211,252,0.03) 60%, rgba(34,211,238,0.08) 100%);
+  background: linear-gradient(90deg, rgba(34,211,238,0.30) 0%, rgba(34,211,238,0.22) 30%, rgba(125,211,252,0.12) 60%, rgba(34,211,238,0.25) 100%);
 }
 
 .holo-green {
-  background: linear-gradient(90deg, rgba(34,197,94,0.12) 0%, rgba(34,197,94,0.06) 30%, rgba(134,239,172,0.03) 60%, rgba(34,197,94,0.08) 100%);
+  background: linear-gradient(90deg, rgba(34,197,94,0.30) 0%, rgba(34,197,94,0.22) 30%, rgba(134,239,172,0.12) 60%, rgba(34,197,94,0.25) 100%);
 }
 
 .holo-red {
-  background: linear-gradient(90deg, rgba(239,68,68,0.12) 0%, rgba(239,68,68,0.06) 30%, rgba(252,165,165,0.03) 60%, rgba(239,68,68,0.08) 100%);
+  background: linear-gradient(90deg, rgba(239,68,68,0.30) 0%, rgba(239,68,68,0.22) 30%, rgba(252,165,165,0.12) 60%, rgba(239,68,68,0.25) 100%);
 }
 
 .holo-yellow {
-  background: linear-gradient(90deg, rgba(234,179,8,0.12) 0%, rgba(234,179,8,0.06) 30%, rgba(252,211,77,0.03) 60%, rgba(234,179,8,0.08) 100%);
+  background: linear-gradient(90deg, rgba(234,179,8,0.30) 0%, rgba(234,179,8,0.22) 30%, rgba(252,211,77,0.12) 60%, rgba(234,179,8,0.25) 100%);
 }
 
-/* Optional thin scan lines on top of overlay */
+.holo-orange {
+  background: linear-gradient(90deg, rgba(249,115,22,0.30) 0%, rgba(249,115,22,0.22) 30%, rgba(251,146,60,0.12) 60%, rgba(249,115,22,0.25) 100%);
+}
+
+.holo-indigo {
+  background: linear-gradient(90deg, rgba(99,102,241,0.30) 0%, rgba(99,102,241,0.22) 30%, rgba(129,140,248,0.12) 60%, rgba(99,102,241,0.25) 100%);
+}
+
+.holo-purple {
+  background: linear-gradient(90deg, rgba(168,85,247,0.30) 0%, rgba(168,85,247,0.22) 30%, rgba(192,132,252,0.12) 60%, rgba(168,85,247,0.25) 100%);
+}
+
+.holo-pink {
+  background: linear-gradient(90deg, rgba(236,72,153,0.30) 0%, rgba(236,72,153,0.22) 30%, rgba(244,114,182,0.12) 60%, rgba(236,72,153,0.25) 100%);
+}
+
+.holo-emerald {
+  background: linear-gradient(90deg, rgba(16,185,129,0.30) 0%, rgba(16,185,129,0.22) 30%, rgba(52,211,153,0.12) 60%, rgba(16,185,129,0.25) 100%);
+}
+
+
 .holo-overlay::after {
   content: '';
   position: absolute;
