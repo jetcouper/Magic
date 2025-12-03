@@ -263,7 +263,8 @@ export default function Jeu() {
                                 life={carte.hp}
                                 description={carte.mechanics.join(", ")}
                                 attack={carte.atk}
-                                className="shrink-0 w-16 h-24 sm:w-24 sm:h-44 hover:scale-[1.5] hover:z-50"
+                                state={carte.state}
+                                className=" holo-container shrink-0 w-16 h-24 sm:w-24 sm:h-44 hover:scale-[1.5] transition duration-300 hover:z-50 "
                             />
                         })
                     }
@@ -283,7 +284,8 @@ export default function Jeu() {
                                 life={carte.hp}
                                 description={carte.mechanics.join(", ")}
                                 attack={carte.atk}
-                                className="shrink-0 w-16 h-24 sm:w-24 sm:h-44 hover:scale-[1.5] hover:z-50"
+                                state={carte.state}
+                                className=" holo-container shrink-0 w-16 h-24 sm:w-24 sm:h-44 hover:scale-[1.5] transition duration-300 hover:z-50 "
                             />
                         })
                     }
@@ -309,7 +311,7 @@ export default function Jeu() {
                     </div>
 
                     {/* Ma main - SANS text-2xl */}
-                    <div className="flex-1 flex gap-6 items-center justify-center overflow-visible mx-2 py-8">
+                    <div className="flex-1 flex gap-6 items-center justify-center overflow-visible mx-2 py-8 ">
                         {
                             etatJeu?.hand?.map((carte) => {
                                 return <Carte
@@ -320,7 +322,8 @@ export default function Jeu() {
                                     life={carte.hp}
                                     description={carte.mechanics.join(", ")}
                                     attack={carte.atk}
-                                    className="shrink-0 w-20 h-28 sm:w-24 sm:h-44 hover:scale-[1.5] hover:z-50"
+                                    state={carte.state}
+                                    className="holo-container shrink-0 w-20 h-28 sm:w-24 sm:h-44 hover:scale-[1.5] hover:z-50 transition duration-300"
                                 />
                             })
                         }
@@ -328,16 +331,16 @@ export default function Jeu() {
 
                     {/* Boutons d'action */}
                     <div className="w-auto shrink-0 flex flex-col items-center justify-center gap-2">
-                        <Button className="text-xs whitespace-nowrap" onClick={() => jouerBouton("HERO_POWER")}>
+                        <Button className="text-xs whitespace-nowrap w-40" onClick={() => jouerBouton("HERO_POWER")}>
                             Hero Power
                         </Button>
-                        <Button className="text-xs whitespace-nowrap" onClick={() => jouerBouton("END_TURN")}>
+                        <Button className="text-xs whitespace-nowrap w-40" onClick={() => jouerBouton("END_TURN")}>
                             End Turn
                         </Button>
-                        <Button className="text-xs whitespace-nowrap" onClick={() => jouerBouton("SURRENDER")}>
+                        <Button className="text-xs whitespace-nowrap w-40" onClick={() => jouerBouton("SURRENDER")}>
                             Abandon
                         </Button>
-                        <Button className="text-xs whitespace-nowrap" onClick={() => chat()}>
+                        <Button className="text-xs whitespace-nowrap w-40" onClick={() => chat()}>
                             Chat
                         </Button>
                         <div className="text-3xl flex items-center justify-center gap-1">

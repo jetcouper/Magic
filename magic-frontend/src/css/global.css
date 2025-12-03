@@ -344,3 +344,76 @@ html, body, section {
     transparent 4px
   );
 }
+
+/* ================================
+   HOLO OVERLAY POUR CARTES
+   ================================ */
+
+.holo-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 0.5rem; /* align with rounded */
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  background: linear-gradient(90deg, rgba(34,211,238,0.06) 0%, rgba(99,102,241,0.04) 30%, rgba(236,72,153,0.03) 60%, rgba(34,211,238,0.05) 100%);
+  background-size: 200% 200%;
+  animation: moveGradient 4s ease infinite, holo-wobble 2.2s ease-in-out infinite alternate;
+  box-shadow: inset 0 0 18px rgba(255,255,255,0.02);
+}
+
+/* Color variants */
+.holo-cyan {
+  background: linear-gradient(90deg, rgba(34,211,238,0.12) 0%, rgba(34,211,238,0.06) 30%, rgba(125,211,252,0.03) 60%, rgba(34,211,238,0.08) 100%);
+  box-shadow: 0 0 12px rgba(34,211,238,0.12), inset 0 0 24px rgba(34,211,238,0.03);
+}
+
+.holo-green {
+  background: linear-gradient(90deg, rgba(34,197,94,0.12) 0%, rgba(34,197,94,0.06) 30%, rgba(134,239,172,0.03) 60%, rgba(34,197,94,0.08) 100%);
+  box-shadow: 0 0 12px rgba(34,197,94,0.12), inset 0 0 24px rgba(34,197,94,0.03);
+}
+
+.holo-red {
+  background: linear-gradient(90deg, rgba(239,68,68,0.12) 0%, rgba(239,68,68,0.06) 30%, rgba(252,165,165,0.03) 60%, rgba(239,68,68,0.08) 100%);
+  box-shadow: 0 0 12px rgba(239,68,68,0.12), inset 0 0 24px rgba(239,68,68,0.03);
+}
+
+.holo-yellow {
+  background: linear-gradient(90deg, rgba(234,179,8,0.12) 0%, rgba(234,179,8,0.06) 30%, rgba(252,211,77,0.03) 60%, rgba(234,179,8,0.08) 100%);
+  box-shadow: 0 0 12px rgba(234,179,8,0.12), inset 0 0 24px rgba(234,179,8,0.03);
+}
+
+/* Optional thin scan lines on top of overlay */
+.holo-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 3px);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* ================================
+   GLITCH COLOR VARIANTS FOR CARDS
+   ================================ */
+
+.holo-glitch-cyan {
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.08) 0%, transparent 50%, rgba(34, 211, 238, 0.04) 100%);
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.5), inset 0 0 15px rgba(34, 211, 238, 0.15);
+}
+
+.holo-glitch-green {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, transparent 50%, rgba(34, 197, 94, 0.04) 100%);
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.5), inset 0 0 15px rgba(34, 197, 94, 0.15);
+}
+
+.holo-glitch-red {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, transparent 50%, rgba(239, 68, 68, 0.04) 100%);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.5), inset 0 0 15px rgba(239, 68, 68, 0.15);
+}
+
+.holo-glitch-yellow {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.08) 0%, transparent 50%, rgba(234, 179, 8, 0.04) 100%);
+  box-shadow: 0 0 20px rgba(234, 179, 8, 0.5), inset 0 0 15px rgba(234, 179, 8, 0.15);
+}
