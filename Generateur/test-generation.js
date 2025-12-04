@@ -13,7 +13,7 @@ const testCartes = [
   {
     "id": 2,
     "name": "Gamorrean Guard",
-    "illustration": "Un imposant garde Gamorréen, armé d'une hache lourde. Éclairage verdâtre, la "porcherie" derrière lui ressemble à un enclos crasseux du palais de Jabba. Style brutal et massif."
+    "illustration": "Un imposant garde Gamorréen, armé d'une hache lourde. Éclairage verdâtre, la porcherie derrière lui ressemble à un enclos crasseux du palais de Jabba. Style brutal et massif."
   },
   {
     "id": 3,
@@ -28,8 +28,8 @@ const CONFIG = {
   replicateModel: 'black-forest-labs/flux-1.1-pro',
   outputDir: './test-images',
   imageFormat: 'png',
-  delayBetweenRequests: 2000,
-  stylePrompt: 'fantasy card game illustration, highly detailed, digital art, professional quality, dramatic lighting, epic composition',
+  delayBetweenRequests: 12000, // 12 secondes (6 requêtes/minute max)
+  stylePrompt: 'Star Wars universe style, science fiction card game art, cinematic quality, detailed character design, Star Wars aesthetic, sci-fi fantasy, dramatic lighting, epic composition, professional digital illustration',
 };
 
 async function generateWithReplicate(card, apiKey) {
@@ -80,8 +80,8 @@ async function testGeneration() {
       console.log(`✅ Sauvegardé: ${filename}`);
 
       if (i < testCartes.length - 1) {
-        console.log(`⏳ Pause de 2s...`);
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        console.log(`⏳ Pause de 12s...`);
+        await new Promise(resolve => setTimeout(resolve, 12000));
       }
     } catch (error) {
       console.error(`❌ Erreur: ${error.message}`);
