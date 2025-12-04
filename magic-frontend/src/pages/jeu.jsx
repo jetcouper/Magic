@@ -391,7 +391,7 @@ export default function Jeu() {
                         <div className="absolute top-2 right-2">
                             <Button className="text-xs" onClick={() => setShowChat(false)}>Fermer</Button>
                         </div>
-                        <div className="w-full h-[60vh] sm:h-[30vh] bg-transparent rounded-md overflow-hidden border border-cyan-300/20">
+                        <div className="w-full h-60 bg-transparent rounded-md overflow-hidden border border-cyan-300/20">
                             <iframe
                                 ref={chatRef}
                                 onLoad={applyStyles}
