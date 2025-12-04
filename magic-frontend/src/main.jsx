@@ -5,6 +5,7 @@ import Login from './pages/login'
 import Lobby from './pages/lobby'
 import Jeu from './pages/jeu'
 import React, { useEffect, useRef } from 'react'
+//import MusicPlayer from "./components/Mu"
 
 createRoot(document.getElementById('root')).render(
     <BrowserRouter>

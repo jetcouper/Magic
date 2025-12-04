@@ -275,6 +275,7 @@ export default function Jeu() {
                                 description={carte.mechanics.join(", ")}
                                 attack={carte.atk}
                                 state={carte.state}
+                                imageURL={cartejeu.find((c) => c.id === carte.id)?.image ?? ""}
                                 className=" holo-container shrink-0 w-16 h-24 sm:w-24 sm:h-44 hover:scale-[1.5] transition duration-300 hover:z-50 "
                             />
                         })
@@ -297,6 +298,7 @@ export default function Jeu() {
                                 description={carte.mechanics.join(", ")}
                                 attack={carte.atk}
                                 state={carte.state}
+                                imageURL={cartejeu.find((c) => c.id === carte.id)?.image ?? ""}
                                 className=" holo-container shrink-0 w-16 h-24 sm:w-24 sm:h-44 hover:scale-[1.5] transition duration-300 hover:z-50 "
                             />
                         })
@@ -336,6 +338,7 @@ export default function Jeu() {
                                     description={carte.mechanics.join(", ")}
                                     attack={carte.atk}
                                     state={carte.state}
+                                    imageURL={cartejeu.find((c) => c.id === carte.id)?.image ?? ""}
                                     className="holo-container shrink-0 w-20 h-28 sm:w-24 sm:h-44 hover:scale-[1.5] hover:z-50 transition duration-300"
                                 />
                             })

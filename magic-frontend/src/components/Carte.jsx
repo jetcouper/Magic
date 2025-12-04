@@ -69,10 +69,10 @@ export default function Carte({ onClick, className = "", credit = "", life = "",
             </div>
 
             {/* Image de la carte - CENTRÉE */}
-            <div className="w-full h-[35%] p-1 flex items-center justify-center">
+            <div className="w-full h-[45%] p-1 flex items-center justify-center">
                 <img 
                     className="rounded border max-w-[75%] max-h-full object-contain" 
-                    src="/images/sabre.jpg" 
+                    src={imageURL} 
                     alt={nom}
                 />
             </div>
