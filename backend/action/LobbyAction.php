@@ -34,7 +34,9 @@
                 
             }
             else {
-                $result = $_SESSION["key"];
+                $username = $_SESSION["username"];
+                $result["key"] = $_SESSION["key"];
+                $result["username"] = $username;
                 return compact("result");
             }
         }

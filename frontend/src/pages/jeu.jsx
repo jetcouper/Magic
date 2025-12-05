@@ -38,6 +38,8 @@ export default function Jeu() {
     const defaiteMusique = useRef(new Audio(defaiteMusic));
     const victoireMusique = useRef(new Audio(victoireMusic));
 
+    const erreur = useRef(new Audio(clickError))
+
     const musiqueEnCours = useRef(null);
 
     const { changePage, toggleMute, isMuted } = useMusic();
@@ -47,8 +49,8 @@ export default function Jeu() {
     }, []);
 
     const audioError = () => {
-        clickerror.current.currentTime = 0;
-        clickerror.current.play();
+        erreur.current.currentTime = 0;
+        erreur.current.play();
     };
     useEffect(() => {
         return () => {
@@ -502,7 +504,7 @@ export default function Jeu() {
                                 scrolling="no"
                                 hideScrollBar={true}
                                 className="w-full h-full bg-transparent"
-                                src={`https://magix.apps-de-cours.com/server/chat/${cleServeur}`}
+                                src={`https://magix.apps-de-cours.com/server/chat/${cleServeur.key}`}
                             ></iframe>
                         </div>
                     </div>

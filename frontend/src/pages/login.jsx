@@ -53,7 +53,7 @@ export default function Login() {
                 <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-cover -z-10">
                     <source src={"/video/star-destroyer-2.3840x2160.mp4"} type="video/mp4"/>
                 </video>
-                {/* <div className="absolute inset-0 bg-black/60 -z-5"></div> */}
+                
                 <div className="relative z-10 flex flex-col items-center justify-center mx-auto min-h-screen py-8 px-4">
                     {/* Logo */}
                     <div className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
@@ -63,10 +63,10 @@ export default function Login() {
                     {/* Container holographique - UTILISEZ LA CLASSE holo-container */}
                     <div className="holo-container w-full max-w-md p-4 text-cyan-300 rounded-xl border border-cyan-300/40 bg-cyan-900/10 backdrop-blur-sm relative overflow-hidden scan-lines">
                         
-                        {/* Effet de glitch en overlay */}
+                        
                         <div className="animate-holo-glitch absolute inset-0 pointer-events-none opacity-20 bg-linear-to-r from-cyan-500/20 to-blue-500/20"></div>
                         
-                        {/* Contenu */}
+                        
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8 relative z-10">
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-cyan-300 md:text-2xl text-center">
                                 IDENTIFICATION REQUISE

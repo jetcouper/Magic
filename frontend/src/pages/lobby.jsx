@@ -13,6 +13,7 @@ export default function Lobby() {
     const [showNotes, setShowNotes] = useState(false);
     const [showDeck, setShowDeck] = useState(false);
     const navigate = useNavigate();
+    const [username, setUserName] = useState("");
     const { changePage, toggleMute, isMuted } = useMusic();
 
 
@@ -55,7 +56,8 @@ export default function Lobby() {
         .then(data => {
             //Réponse du serveur, afficher un message de succès/erreur
             console.log(data);
-            setReponse(data);
+            setReponse(data.key);
+            setUserName(data.username)
         })
     }
     const quitterSession = () =>{
@@ -151,12 +153,12 @@ export default function Lobby() {
                         <img className="w-full h-full object-contain" src="/images/Star_Wars_Logo.svg.png" />
                     </div>
                     <div className="mt-6">
-                        <p className="text-cyan-300 text-xl">Bienvenue dans le lobby !</p>
+                        <p className="text-cyan-300 text-xl">Bienvenue {username} !</p>
                     </div>
                 </div>
             </div>
 
-            <div className="absolute bottom-0 left-1/4 w-3/4 h-1/2 md:h-1/3 lg:h-[22%] holo-container border border-cyan-300/40 bg-cyan-900/10 backdrop-blur-sm overflow-auto scan-lines">
+            <div className="absolute bottom-0 left-1/4 w-3/4 h-1/2 md:h-1/3 lg:h-[18%] holo-container border border-cyan-300/40 bg-cyan-900/10 backdrop-blur-sm overflow-auto scan-lines">
                 <iframe
                     ref={chatRef}
                     onLoad={appliquerFonctions}

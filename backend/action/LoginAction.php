@@ -14,6 +14,8 @@
                 $data["username"] = $_POST["username"];
                 $data["password"] = $_POST["password"];
 
+                $_SESSION["username"] = $_POST["username"];
+
                 $result = parent::callAPI("signin", $data);
 
                 if ($result == "INVALID_USERNAME_PASSWORD") {
