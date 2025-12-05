@@ -161,57 +161,10 @@
   }
 }
 
-/* Animation du faisceau de projection */
-@keyframes projection-beam {
-  0% { 
-    opacity: 0.3;
-    transform: scaleY(0.95) scaleX(1);
-  }
-  50% { 
-    opacity: 0.6;
-    transform: scaleY(1) scaleX(0.98);
-  }
-  100% { 
-    opacity: 0.3;
-    transform: scaleY(0.95) scaleX(1);
-  }
-}
 
-/* Animation de pulsation du projecteur */
-@keyframes projector-pulse {
-  0%, 100% { 
-    box-shadow: 
-      0 0 20px rgba(34, 211, 238, 0.8),
-      0 0 40px rgba(34, 211, 238, 0.6),
-      0 0 60px rgba(34, 211, 238, 0.4);
-    opacity: 0.9;
-  }
-  50% { 
-    box-shadow: 
-      0 0 30px rgba(34, 211, 238, 1),
-      0 0 60px rgba(34, 211, 238, 0.8),
-      0 0 90px rgba(34, 211, 238, 0.6);
-    opacity: 1;
-  }
-}
 
-/* Animation des particules dans le faisceau */
-@keyframes particles-rise {
-  0% { 
-    transform: translateY(100%) scale(0.8);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.5;
-  }
-  90% {
-    opacity: 0.3;
-  }
-  100% { 
-    transform: translateY(-100%) scale(1.2);
-    opacity: 0;
-  }
-}
+
+
 
 /* ================================
    CLASSES UTILITAIRES
