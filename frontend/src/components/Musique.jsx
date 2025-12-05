@@ -52,7 +52,7 @@ export const MusicProvider = ({ children }) => {
 
             audioRef.current = new Audio(musiques.current[musiqueActuel]);
             audioRef.current.loop = true;
-            audioRef.current.volume = isMuted ? 0 : 0.5;
+            audioRef.current.volume = isMuted ? 0 : 1;
 
             audioRef.current.play()
         }
@@ -67,7 +67,7 @@ export const MusicProvider = ({ children }) => {
 
     useEffect(() => {
         if (audioRef.current) {
-            audioRef.current.volume = isMuted ? 0 : 0.5;
+            audioRef.current.volume = isMuted ? 0 : 1;
 
             if (!isMuted && audioRef.current.paused && hasInteracted) {
                 audioRef.current.play()
