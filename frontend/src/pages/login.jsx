@@ -55,12 +55,12 @@ export default function Login() {
                 </video>
                 
                 <div className="relative z-10 flex flex-col items-center justify-center mx-auto min-h-screen py-8 px-4">
-                    {/* Logo */}
+                    
                     <div className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                         <img className="w-40 h-30" src={logo} alt="logo" />
                     </div>
                     
-                    {/* Container holographique - UTILISEZ LA CLASSE holo-container */}
+                    {/* Container holographique - UTILISEZ LA CLASSE holo-container aussi pour d'autre page, si possible ou souhaité. */}
                     <div className="holo-container w-full max-w-md p-4 text-cyan-300 rounded-xl border border-cyan-300/40 bg-cyan-900/10 backdrop-blur-sm relative overflow-hidden scan-lines">
                         
                         
@@ -133,7 +133,7 @@ export default function Login() {
                                 </div>
                             </form>
                             
-                            {/* Footer */}
+                            {/* Bas du login */}
                             <div className="text-center pt-4 border-t border-cyan-500/20">
                                 <p className="text-cyan-600 text-xs tracking-widest">
                                     SYSTÈME SÉCURISÉ
@@ -142,7 +142,7 @@ export default function Login() {
                         </div>
                     </div>
                     
-                    {/* Indicateurs système */}
+                    {/* Déco */}
                     <div className="mt-6 flex justify-center space-x-8 text-cyan-500 text-xs">
                         <div className="flex items-center space-x-2">
                             <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>

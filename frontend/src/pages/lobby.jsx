@@ -54,7 +54,7 @@ export default function Lobby() {
         fetch("/api/lobby.php")
         .then(response => response.json())
         .then(data => {
-            //Réponse du serveur, afficher un message de succès/erreur
+            //Réponse du serveur key et username, afficher un message de succès/erreur
             console.log(data);
             setReponse(data.key);
             setUserName(data.username)
@@ -70,7 +70,6 @@ export default function Lobby() {
         })
         .then(response => response.json())
         .then(data => {
-            //Réponse du serveur, afficher un message de succès/erreur
             console.log(data);
             setReponse("");
             navigate("/");
@@ -102,7 +101,7 @@ export default function Lobby() {
         })
         .then(response => response.json())
         .then(data => {
-            //Réponse du serveur, afficher un message de succès/erreur
+            //Réponse du serveur, commencer à jouer
             console.log(data);
             setReponse("");
             versJeu();
